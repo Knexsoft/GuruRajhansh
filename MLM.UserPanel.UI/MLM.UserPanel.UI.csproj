@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.0-preview1-final" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MLM.Business\MLM.Business.csproj" />
+    <ProjectReference Include="..\MLM.DataLayar\MLM.DataLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\scripts\Directives\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\angularjs\angular.min.js" />
+    <None Include="wwwroot\scripts\Components\Login\Login.js" />
+  </ItemGroup>
+
+</Project>
