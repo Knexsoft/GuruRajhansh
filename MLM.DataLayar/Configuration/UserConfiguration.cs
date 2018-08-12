@@ -30,8 +30,8 @@ namespace MLM.DataLayer.Configuration
             builder.Property(x => x.PasswordSalt).HasMaxLength(100).IsRequired();
             builder.Property(x => x.HashPassword).HasMaxLength(100).IsRequired();
             builder.Property(x => x.ParentSponserID).IsRequired();
+            builder.Property(x => x.ActiveToken).HasMaxLength(8);
             builder.Property(x => x.IsActive).IsRequired();
-            builder.Property(x => x.ActiveToken).IsRequired();
             builder.Property(x => x.CreatedOn).IsRequired();
             builder.Property(x => x.ModifiedOn).IsRequired();
             builder.Property(x => x.IsDeleted).IsRequired();

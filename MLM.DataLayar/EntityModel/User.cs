@@ -21,7 +21,7 @@ namespace MLM.DataLayer.EntityModel
         public string HashPassword { get; set; }
         public int ParentSponserID { get; set; }
         public bool IsActive { get; set; }
-        public int ActiveToken { get; set; }
+        public string ActiveToken { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
         public bool IsDeleted { get; set; }

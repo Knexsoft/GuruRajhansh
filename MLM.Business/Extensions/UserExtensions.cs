@@ -13,5 +13,15 @@ namespace MLM.Business.Extensions
         {
             return userRepository.GetAll().FirstOrDefault(x => x.ContactNumber == mobile);
         }
+
+        public static void UpdateToken(this IBaseRepository<User> userRepository, Guid userID, string tokenKey)
+        {
+            var user = userRepository.Get(userID);
+            if (user != null)
+            {
+                user.ActiveToken = tokenKey;
+                userRepository.Update(user, tokenKey);
+            }               
+        }
     }
 }

@@ -57,7 +57,6 @@ namespace MLM.Business.Services
                 PasswordSalt = _passwordSalt,
                 HashPassword = _hashPassword,
                 IsActive = true,
-                ActiveToken = 0,
                 IsDeleted = false,
                 ModifiedOn = DateTime.MinValue,
                 CreatedOn = DateTime.Now

@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MLM.Business.Abstracts;
+using MLM.Business.Extensions;
 using MLM.Business.Models.ReqModels;
 using MLM.Business.Services;
 using MLM.DataLayer.Abstracts;
@@ -16,12 +17,12 @@ namespace MLM.UserPanel.UI.Controllers
     public class UserController : Controller
     {
         private readonly IMembershipService _membershipService;
-        public UserController(IMembershipService membershipService)
+        private readonly IBaseRepository<User> _userRepository;
+        public UserController(IMembershipService membershipService, IBaseRepository<User> userRepository)
         {
             _membershipService = membershipService;
+            _userRepository = userRepository;
         }
-
-
 
         public IActionResult Index()
         {
@@ -38,7 +39,7 @@ namespace MLM.UserPanel.UI.Controllers
             return View();
         }
 
-        [Route("register")]
+       // [Route("register")]
         [HttpPost]
         public IActionResult Register(RegistrationRequest register)
         {
@@ -62,6 +63,17 @@ namespace MLM.UserPanel.UI.Controllers
             }
         }
 
-
+        public IActionResult UpdateUserToken(Guid userID, string tokenKey)
+        {
+            try
+            {
+                _userRepository.UpdateToken(userID, tokenKey);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return new ContentResult { Content = ex.Message, StatusCode = (int)HttpStatusCode.BadRequest, ContentType = "text/plain" };
+            }
+        }
     }
 }
