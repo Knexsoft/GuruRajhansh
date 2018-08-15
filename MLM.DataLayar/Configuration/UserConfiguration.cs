@@ -24,7 +24,6 @@ namespace MLM.DataLayer.Configuration
             builder.Property(x => x.ContactNumber).HasMaxLength(10).IsRequired();
             builder.Property(x => x.EmailID).HasMaxLength(100);
             builder.Property(x => x.Gender).HasMaxLength(10).IsRequired();
-            builder.Property(x => x.DOB).IsRequired();
             builder.Property(x => x.City).HasMaxLength(100).IsRequired();
             builder.Property(x => x.UserRole).HasMaxLength(10).IsRequired();
             builder.Property(x => x.PasswordSalt).HasMaxLength(100).IsRequired();

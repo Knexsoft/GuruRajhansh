@@ -1,0 +1,96 @@
+﻿@model MLM.Business.Models.ReqModels.RegistrationRequest
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+<section ng-controller="ctrRegistration">
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h2>Registration...</h2>
+                </div>
+                <div class="panel-body">
+                    <form ng-submit="register()" name="UserRegistration">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">First Name</label>
+                                    <input asp-for="FirstName" type="text" class="form-control" ng-model="User.FirstName">
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Last Name</label>
+                                    <input asp-for="LastName" type="text" class="form-control" ng-model="User.LastName">
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Mobile Number</label>
+                                    <input asp-for="MobileNumber" type="text" class="form-control" ng-model="User.MobileNumber">
+                                    <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Email ID</label>
+                                    <input asp-for="EmailID" type="email" class="form-control" ng-model="User.EmailID">
+                                    <span asp-validation-for="EmailID" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Gender</label>
+                                    <select asp-for="Gender" class="form-control">
+                                        <option value="0">Select</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">City</label>
+                                    <input asp-for="City" type="text" class="form-control" ng-model="User.City">
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Password</label>
+                                    <input asp-for="Password" type="text" class="form-control" ng-model="User.Password">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Confirm Password</label>
+                                    <input asp-for="ConfirmPassword" type="text" class="form-control" ng-model="User.ConfirmPassword">
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</section>
+
+@*Scripts*@
+@*<script src="~/scripts/Controller/Registration/Registration.js"></script>*@

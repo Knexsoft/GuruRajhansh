@@ -1,0 +1,182 @@
+﻿@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment App
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <title>@ViewData["Title"] - GuruRajHansh</title>
+    <!-- web-fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,500' rel='stylesheet' type='text/css'>
+    @*<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>*@
+    <!-- off-canvas -->
+    <link href="@Url.Content("~/public/css/mobile-menu.css")" rel="stylesheet">
+    <!-- font-awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Flat Icon -->
+    <link href="@Url.Content("~/public/fonts/flaticon/flaticon.css")" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css">
+    <!-- Style CSS -->
+    <link href="@Url.Content("~/public/css/style.css")" rel="stylesheet">
+</head>
+<body>
+    <div id="main-wrapper" ng-app="publicApp" ng-controller="ctrPublicLayout">
+        <!-- Page Preloader -->
+        <div id="preloader">
+            <div id="status">
+                <div class="status-mes"></div>
+            </div>
+        </div>
+        <div class="uc-mobile-menu-pusher">
+            <div class="content-wrapper">
+                <!-- Header Top -->
+                <div class="header-top visible-md visible-lg">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4">
+                                <ul class="social-icon">
+                                    <li><a href="" class="fa fa-facebook" aria-hidden="true"> </a></li>
+                                    <li><a href="" class="fa fa-twitter" aria-hidden="true"> </a></li>
+                                    <li><a href="" class="fa fa-pinterest-p" aria-hidden="true"> </a></li>
+                                    <li><a href="" class="fa fa-google-plus" aria-hidden="true"> </a></li>
+                                    <li><a href="" class="fa fa-linkedin" aria-hidden="true"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-12 col-md-8">
+                                <ul class="top-contact pull-right">
+                                    <li class="phone"><i class="fa fa-phone-square" aria-hidden="true"></i> +91-9636122490</li>
+                                    <li class="email">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        gururajhansh@gmail.com
+                                    </li>
+                                    <li class="get-a-quote"><a href="#" title="">Get a Quote</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- .navbar-top -->
+                <nav class="navbar m-menu navbar-default">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt=""></a>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="#navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right main-nav">
+                                <li class="active"><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="services.html">Services</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li class="dropdown dropdown-toggle">
+                                    <a href="#" data-toggle="dropdown">Dropdown <span><i class="fa fa-angle-down"></i></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Awesome Features</a></li>
+                                        <li><a href="#">Clean Interface</a></li>
+                                        <li><a href="#">Available Possibilities</a></li>
+                                        <li><a href="#">Responsive Design</a></li>
+                                        <li><a href="#">Pixel Perfect Graphics</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- .navbar-collapse -->
+                    </div>
+                    <!-- .container -->
+                </nav>
+                <!-- .nav -->
+                @RenderBody()
+                <footer class="footer">
+                    <!-- Footer Widget Section -->
+                    <div class="footer-widget-section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="footer-logo">
+                                        <a href="#"><img class="img-responsive" src="img/logo-footer.png" alt=""></a>
+                                    </div>
+                                </div><!-- /.col-sm-4 -->
+                                <div class="col-md-8">
+                                    <div class="footer-text">
+                                        <p>Assertively architect synergistic platforms vis-a-vis premium results. Synergistically facilitate high-payoff e-services rather than top-line sources. Collaboratively drive market positioning infomediaries without real-time e-commerce.</p>
+                                        <ul>
+                                            <li class="phone">
+                                                <i class="fa fa-volume-control-phone" aria-hidden="true"></i> 1-677-124-44227
+                                                <small><i class="fa fa-clock-o" aria-hidden="true"></i> Mon - Sat 8.00 - 18.00h</small>
+                                            </li>
+                                            <li class="address">
+                                                <address>
+                                                    <i class="fa fa-map-pin" aria-hidden="true"></i>
+                                                    437 S Olive St, Los Angeles
+                                                </address>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div><!-- /.col-sm-4 -->
+                            </div>
+                        </div>
+                    </div><!-- /.Footer Widget Section -->
+                    <div class="copyright-section">
+                        <div class="container clearfix">
+                            <span class="copytext">Copyright &copy; 2016 | <a href="https://uicookies.com/downloads/marketer-bootstrap-html5-advertising-agency-website-template/">Marketer</a> Designed And Developed By: <strong style="color:#4d6de3">uiCookies.com</strong></span>
+                            <ul class="list-inline pull-right">
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Services</a></li>
+                                <li><a href="#">Portfolio</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div><!-- .container -->
+                    </div><!-- .copyright-section -->
+                </footer>
+                <!-- .footer -->
+            </div>
+            <!-- .content-wrapper -->
+        </div>
+        <!-- .uc-mobile-menu-pusher -->
+        <div class="uc-mobile-menu uc-mobile-menu-effect">
+            <button type="button" class="close" aria-hidden="true" data-toggle="offcanvas"
+                    id="uc-mobile-menu-close-btn">
+                &times;
+            </button>
+            <div>
+                <div>
+                    <ul id="menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- .uc-mobile-menu -->
+    </div>
+    <!-- #main-wrapper -->
+    <!-- Script -->
+    <script src="@Url.Content("~/public/js/jquery-2.1.4.min.js")"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+    <script src="@Url.Content("~/public/js/smoothscroll.js")"></script>
+    <script src="@Url.Content("~/public/js/mobile-menu.js")"></script>
+    <script src="@Url.Content("~/public/js/scripts.js")"></script>
+
+    <script src="@Url.Content("~/angularjs/angular.min.js")"></script>
+    <script src="@Url.Content("~/scripts/Controllers/Layouts/PublicLayout.js")"></script>
+    <script src="@Url.Content("~/scripts/Controllers/Registration/Registration.js")"></script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

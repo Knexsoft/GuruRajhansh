@@ -18,7 +18,6 @@ namespace MLM.Business.Models.ReqModels
         public string MobileNumber { get; set; }
         public string EmailID { get; set; }
         public string Gender { get; set; }
-        public DateTime DOB { get; set; }
         public string City { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }

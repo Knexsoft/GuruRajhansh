@@ -4,14 +4,16 @@ using MLM.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MLM.DataLayer.Migrations
 {
     [DbContext(typeof(MLMDbContext))]
-    partial class MLMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180814121008_alterUserDOB")]
+    partial class alterUserDOB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

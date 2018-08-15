@@ -17,11 +17,12 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\scripts\Directives\" />
+    <Folder Include="wwwroot\scripts\Components\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\angularjs\angular.min.js" />
-    <None Include="wwwroot\scripts\Components\Login\Login.js" />
+    <None Include="wwwroot\scripts\Controllers\Login\Login.js" />
   </ItemGroup>
 
 </Project>

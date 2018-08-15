@@ -51,7 +51,6 @@ namespace MLM.Business.Services
                 ContactNumber = regReq.MobileNumber,
                 EmailID = regReq.EmailID,
                 Gender = regReq.Gender,
-                DOB = regReq.DOB,
                 City = regReq.City,
                 UserRole = _userRole,
                 PasswordSalt = _passwordSalt,

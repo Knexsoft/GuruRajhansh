@@ -64,6 +64,9 @@ namespace MLM.UserPanel.UI
                 app.UseHsts();
             }
 
+            string AppRootPath = env.ContentRootPath; //Application Base Path
+            string WebRootPath = env.WebRootPath;  //wwwroot folder path
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

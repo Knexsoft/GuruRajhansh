@@ -34,7 +34,8 @@ namespace MLM.UserPanel.UI.Controllers
             return View();
         }
 
-        public IActionResult Registeration() 
+        
+        public IActionResult Registration()
         {
             return View();
         }
@@ -50,11 +51,7 @@ namespace MLM.UserPanel.UI.Controllers
                 else
                 {
                     User user = this._membershipService.CreateUser(register);
-                    
-
-
                         return Ok();
-                   
                 }
             }
             catch (Exception ex)

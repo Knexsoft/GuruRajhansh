@@ -14,7 +14,6 @@ namespace MLM.DataLayer.EntityModel
         public string ContactNumber { get; set; }
         public string EmailID { get; set; }
         public string Gender { get; set; }
-        public DateTime DOB { get; set; }
         public string City { get; set; }
         public string UserRole { get; set; }
         public string PasswordSalt { get; set; }
