@@ -4,16 +4,47 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_PublicLayout.cshtml";
 }
+<style>
+
+    .border-bottom > h2 {
+        border-bottom: solid 1px #0094ff;
+    }
+</style>
 <section ng-controller="ctrRegistration">
     <div class="row">
-        <div class="col-md-6"></div>
         <div class="col-md-6">
             <div class="panel">
-                <div class="panel-heading">
+                @*<div class="panel-heading">
+                        <h2>Registration...</h2>
+                    </div>*@
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading border-bottom">
                     <h2>Registration...</h2>
                 </div>
                 <div class="panel-body">
                     <form ng-submit="register()" name="UserRegistration">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Sponser Number</label>
+                                    <input asp-for="ParentSponserID" type="text" class="form-control" ng-model="User.SponserID">
+                                    <span asp-validation-for="ParentSponserID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Sponser By</label>
+                                    <input type="text" class="form-control" ng-model="SponserBy">
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -50,10 +81,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Gender</label>
-                                    <select asp-for="Gender" class="form-control">
-                                        <option value="0">Select</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                    <select asp-for="Gender" class="form-control" ng-model="User.Gender">
+                                        <option ng-repeat="gender in Genders" value="{{gender.Value}}" ng-selected="{{gender.Selected}}">{{gender.Text}}</option>
                                     </select>
                                     <span asp-validation-for="Gender" class="text-danger"></span>
                                 </div>
@@ -70,25 +99,25 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Password</label>
-                                    <input asp-for="Password" type="text" class="form-control" ng-model="User.Password">
+                                    <input asp-for="Password" type="password" class="form-control" ng-model="User.Password">
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Confirm Password</label>
-                                    <input asp-for="ConfirmPassword" type="text" class="form-control" ng-model="User.ConfirmPassword">
+                                    <input asp-for="ConfirmPassword" type="password" class="form-control" ng-model="User.ConfirmPassword">
                                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                        <button type="submit" class="btn btn-primary pull-left font-weight-bold"><i class="fa fa-user"></i>&nbsp;Submit</button>
+                        <button type="reset" class="btn btn-danger pull-left" style="margin-left: 10px;"><i class="fa fa-close"></i>&nbsp;Cancel</button>
                         <div class="clearfix"></div>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
     </div>
 </section>
 

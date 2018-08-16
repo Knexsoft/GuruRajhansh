@@ -1,28 +1,40 @@
-﻿app.controller("ctrRegistration", function ($scope, $http) {
+﻿app.controller("ctrRegistration", ['$scope', 'UserServices', function ($scope, UserServices) {
     var oUser = {};
+    $scope.Genders = [{
+        Text: '--Select--',
+        Value: null,
+        Selected: true
+    }, {
+        Text: 'Male',
+        Value: 'Male',
+        Selected: false
+
+    }, {
+        Text: 'Female',
+        Value: 'Female',
+        Selected: false
+    }];
 
     $scope.register = function () {
+        $scope.$parent.Preloader = true;
         var _user = $scope.User;
-        User = {
-            ParentSponserID = getUrlParameter('sponserid'),
-            
-        }
+        oUser = {
+            ParentSponserID: _user.SponserID,
+            FirstName: _user.FirstName,
+            LastName: _user.LastName,
+            MobileNumber: _user.MobileNumber,
+            EmailID: _user.EmailID,
+            Gender: _user.Gender,
+            City: _user.City,
+            Password: _user.Password,
+            ConfirmPassword: _user.ConfirmPassword
+        };
+        UserServices.CreateNewUser(oUser).then(function (response) {
+            debugger;
+            $scope.$parent.Preloader = false;
+            $scope.User = null;
+        }, function (error) {
+            $scope.$parent.Preloader = false;
+        });
     }
-
-    function getUrlParameter(param, dummyPath) {
-        var sPageURL = dummyPath || window.location.search.substring(1),
-            sURLVariables = sPageURL.split(/[&||?]/),
-            res;
-
-        for (var i = 0; i < sURLVariables.length; i += 1) {
-            var paramName = sURLVariables[i],
-                sParameterName = (paramName || '').split('=');
-
-            if (sParameterName[0] === param) {
-                res = sParameterName[1];
-            }
-        }
-
-        return res;
-    }
-});
+}]);

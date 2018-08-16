@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MLM.Business.Abstracts;
 using MLM.Business.Extensions;
 using MLM.Business.Models.ReqModels;
 using MLM.Business.Services;
+using MLM.Business.Utilities;
 using MLM.DataLayer.Abstracts;
 using MLM.DataLayer.EntityModel;
 
@@ -29,7 +31,7 @@ namespace MLM.UserPanel.UI.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult Login(LoginRequest entity)
         {
             try
             {
@@ -59,7 +61,7 @@ namespace MLM.UserPanel.UI.Controllers
                        
         }
 
-        public IActionResult Registeration() 
+        public IActionResult Registration() 
         {
             return View();
         }

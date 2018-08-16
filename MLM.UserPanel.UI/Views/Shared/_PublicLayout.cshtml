@@ -12,7 +12,7 @@
     <!-- off-canvas -->
     <link href="@Url.Content("~/public/css/mobile-menu.css")" rel="stylesheet">
     <!-- font-awesome -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <!-- Flat Icon -->
     <link href="@Url.Content("~/public/fonts/flaticon/flaticon.css")" rel="stylesheet">
     <!-- Bootstrap -->
@@ -23,7 +23,7 @@
 <body>
     <div id="main-wrapper" ng-app="publicApp" ng-controller="ctrPublicLayout">
         <!-- Page Preloader -->
-        <div id="preloader">
+        <div id="preloader" ng-show="Preloader">
             <div id="status">
                 <div class="status-mes"></div>
             </div>
@@ -68,7 +68,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt=""></a>
+                            <a class="navbar-brand" href="index.html"><img src="~/public/img/logo.png" alt=""></a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -175,6 +175,7 @@
 
     <script src="@Url.Content("~/angularjs/angular.min.js")"></script>
     <script src="@Url.Content("~/scripts/Controllers/Layouts/PublicLayout.js")"></script>
+    <script src="@Url.Content("~/scripts/Services/User.Service.js")"></script>
     <script src="@Url.Content("~/scripts/Controllers/Registration/Registration.js")"></script>
     @RenderSection("Scripts", required: false)
 

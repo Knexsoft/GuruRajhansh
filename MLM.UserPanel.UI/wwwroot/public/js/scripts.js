@@ -5,10 +5,10 @@ jQuery(function ($) {
     // -------------------------------------------------------------
     // Preloader
     // -------------------------------------------------------------
-    (function () {
-        $('#status').fadeOut();
-        $('#preloader').delay(200).fadeOut('slow');
-    }());
+    //(function () {
+    //    $('#status').fadeOut();
+    //    $('#preloader').delay(200).fadeOut('slow');
+    //}());
 
 
 

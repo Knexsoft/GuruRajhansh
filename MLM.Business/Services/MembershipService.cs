@@ -109,7 +109,7 @@ namespace MLM.Business.Services
         {
             int initSponserID = 100001;
             int prevSponserID = _userRepository.All.OrderByDescending(x => x.SponserID).Select(x => x.SponserID).FirstOrDefault();
-            return prevSponserID == 0 ? initSponserID : prevSponserID++;
+            return prevSponserID == 0 ? initSponserID : prevSponserID + 1;
         }
 
         #endregion
