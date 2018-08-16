@@ -31,11 +31,35 @@ namespace MLM.UserPanel.UI.Controllers
 
         public IActionResult Login()
         {
-            return View();
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+                else
+                {
+                    var entityModel = new MembershipContext();
+                    string mobile = entity.UserID;
+                    string password = entity.Password;
+
+                    entityModel = this._membershipService.ValidateUser(mobile, password);
+
+                    string user = null;
+                    string role = null;
+                    HttpContext.Session.SetString(user, entityModel.User.FirstName);
+                    HttpContext.Session.SetString(role, entityModel.User.UserRole);
+
+                   
+                }
+                return Redirect("Index");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }       
+                       
         }
 
-        
-        public IActionResult Registration()
+        public IActionResult Registeration() 
         {
             return View();
         }
@@ -50,8 +74,8 @@ namespace MLM.UserPanel.UI.Controllers
                     return BadRequest(ModelState);
                 else
                 {
-                    User user = this._membershipService.CreateUser(register);
-                        return Ok();
+                    User user = this._membershipService.CreateUser(register);                  
+                                            return Ok();                   
                 }
             }
             catch (Exception ex)
