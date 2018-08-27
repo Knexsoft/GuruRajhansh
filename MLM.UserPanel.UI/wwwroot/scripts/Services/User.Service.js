@@ -19,4 +19,20 @@ app.service('UserServices', ['$http', function ($http) {
         });
     }
 
+    rm.Login = function (oUser) {
+        return $http({
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: "/User/Login",
+            params: oUser
+        });
+    }
+
+    rm.Logout = function () {
+        return $http({
+            method: 'GET',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: "/user/Logout"
+        });
+    }
 }])

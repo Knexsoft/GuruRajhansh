@@ -1,0 +1,22 @@
+﻿<table class="table table-bordered bordered table-striped table-condensed datatable" ui-jq="dataTable" ui-options="dataTableOpt">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Age</th>
+            <th>Start Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="n in data">
+            <td>{{$index+1}}</td>
+            <td>{{n[0]}}</td>
+            <td>{{n[1]}}</td>
+            <td>{{n[2]}}</td>
+            <td>{{n[3]}}</td>
+            <td>{{n[4] | date:'dd/MM/yyyy'}}</td>
+        </tr>
+    </tbody>
+</table>

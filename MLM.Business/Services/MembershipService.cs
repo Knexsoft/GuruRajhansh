@@ -1,6 +1,7 @@
 ﻿using MLM.Business.Abstracts;
 using MLM.Business.Extensions;
 using MLM.Business.Models.ReqModels;
+using MLM.Business.Models.ViewModels;
 using MLM.Business.Utilities;
 using MLM.DataLayer.Abstracts;
 using MLM.DataLayer.EntityModel;
@@ -70,24 +71,13 @@ namespace MLM.Business.Services
             throw new NotImplementedException();
         }
 
-        public MembershipContext ValidateUser(string mobile, string password)
+        public UserView ValidateUser(string mobile, string password)
         {
-            var membershipCtx = new MembershipContext();
-
             var user = _userRepository.GetUserByMobile(mobile);
             if (user != null && isUserValid(user, password))
-            {
-                string[] userRoles = new string[2];
-                userRoles[0] = user.UserRole;
-                membershipCtx.User = user;
-
-                var identity = new GenericIdentity(user.ContactNumber);
-                membershipCtx.Principal = new GenericPrincipal(
-                    identity,
-                    userRoles);
-            }
-
-            return membershipCtx;
+                return user.GetUserView();
+            else
+                return null;
         }
         #endregion
 
@@ -95,7 +85,7 @@ namespace MLM.Business.Services
         private bool isUserValid(User user, string password)
         {
             if (isPasswordValid(user, password))
-                return !user.IsDeleted;
+                return (user.IsActive && !user.IsDeleted);
             else
                 return false;
         }

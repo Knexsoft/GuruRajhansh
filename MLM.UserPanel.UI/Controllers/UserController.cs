@@ -1,29 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MLM.Business.Abstracts;
 using MLM.Business.Extensions;
 using MLM.Business.Models.ReqModels;
-using MLM.Business.Services;
-using MLM.Business.Utilities;
 using MLM.DataLayer.Abstracts;
 using MLM.DataLayer.EntityModel;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MLM.UserPanel.UI.Controllers
 {
-   // [RoutePrefix("api/user")]
+    [Authorize]
+    [Route("[Controller]")]
     public class UserController : Controller
     {
         private readonly IMembershipService _membershipService;
         private readonly IBaseRepository<User> _userRepository;
-        public UserController(IMembershipService membershipService, IBaseRepository<User> userRepository)
+        private readonly ISessionHandler _sessionHandler;
+
+        public UserController(IMembershipService membershipService, IBaseRepository<User> userRepository, ISessionHandler sessionHandler)
         {
             _membershipService = membershipService;
             _userRepository = userRepository;
+            _sessionHandler = sessionHandler;
         }
 
         public IActionResult Index()
@@ -31,7 +35,16 @@ namespace MLM.UserPanel.UI.Controllers
             return View();
         }
 
-        public IActionResult Login(LoginRequest entity)
+        [AllowAnonymous]
+        [HttpGet("Login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginRequest login)
         {
             try
             {
@@ -39,35 +52,42 @@ namespace MLM.UserPanel.UI.Controllers
                     return BadRequest(ModelState);
                 else
                 {
-                    var entityModel = new MembershipContext();
-                    string mobile = entity.UserID;
-                    string password = entity.Password;
-
-                    entityModel = this._membershipService.ValidateUser(mobile, password);
-
-                    string user = null;
-                    string role = null;
-                    HttpContext.Session.SetString(user, entityModel.User.FirstName);
-                    HttpContext.Session.SetString(role, entityModel.User.UserRole);
-
-                   
+                    string mobileNumber = login.UserID.Trim();
+                    var user = _membershipService.ValidateUser(mobileNumber, login.Password);
+                    if (user != null)
+                    {
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Name, user.FullName),
+                            new Claim(ClaimTypes.MobilePhone, user.MobileNumber)
+                        };
+                        ClaimsIdentity userIdentity = new ClaimsIdentity(claims, "login");
+                        ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+                        await HttpContext.SignInAsync(principal);
+                        _sessionHandler.SetUser(user);
+                        return new JsonResult(user);
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
                 }
-                return Redirect("Index");
             }
             catch (Exception ex)
             {
-                throw ex;
-            }       
-                       
+                return View();
+            }
         }
 
-        public IActionResult Registration() 
+        [AllowAnonymous]
+        [HttpGet("Registration")]
+        public IActionResult Registration()
         {
             return View();
         }
 
-       // [Route("register")]
-        [HttpPost]
+        [AllowAnonymous]
+        [HttpPost("Register")]
         public IActionResult Register(RegistrationRequest register)
         {
             try
@@ -76,8 +96,8 @@ namespace MLM.UserPanel.UI.Controllers
                     return BadRequest(ModelState);
                 else
                 {
-                    User user = this._membershipService.CreateUser(register);                  
-                                            return Ok();                   
+                    User user = this._membershipService.CreateUser(register);
+                    return Ok();
                 }
             }
             catch (Exception ex)
@@ -86,6 +106,7 @@ namespace MLM.UserPanel.UI.Controllers
             }
         }
 
+        [HttpPost("UpdateToken")]
         public IActionResult UpdateUserToken(Guid userID, string tokenKey)
         {
             try
@@ -97,6 +118,13 @@ namespace MLM.UserPanel.UI.Controllers
             {
                 return new ContentResult { Content = ex.Message, StatusCode = (int)HttpStatusCode.BadRequest, ContentType = "text/plain" };
             }
+        }
+
+        [HttpGet("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return Ok();
         }
     }
 }

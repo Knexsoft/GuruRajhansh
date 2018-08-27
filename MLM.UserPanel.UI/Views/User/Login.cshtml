@@ -1,94 +1,64 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    ViewData["Title"] = "Login || GuruRajhansh";
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
 }
+<style>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>
-        Material Dashboard by Creative Tim
-    </title>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <link href="~/css/material-dashboard.css" rel="stylesheet" />
-</head>
-<body class="">
-    <div class="wrapper ">
-        <div class="main-panel">
+    .border-bottom > h2 {
+        border-bottom: solid 1px #0094ff;
+    }
+</style>
+<section ng-controller="ctrLogin">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                @*<div class="panel-heading">
+                        <h2>Registration...</h2>
+                    </div>*@
+                <div class="panel-body">
 
-            <!-- End Navbar -->
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-2">
-
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header card-header-primary">
-                                    <h4 class="card-title">LogIn</h4>
-                                    <p class="card-category"></p>
-                                </div>
-                                <div class="card-body">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="bmd-label-floating">Phone</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="bmd-label-floating">Password</label>
-                                                    <input type="password" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary pull-right col-sm-12" style="float: right;">LogIn</button>
-                                        <div style="text-align:center;" class="clearfix"><a href="@Url.Action("Registeration","Home")">SignUp</a></div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-
-                        </div>
-                    </div>
                 </div>
             </div>
-            <footer class="footer">
-                <div class="container-fluid">
-
-                    <div class="copyright float-right">
-                        &copy;
-                        <script>document.write(new Date().getFullYear())</script>,
-                        <a href="" target="_blank">MLM</a> web.
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-lg-2">&nbsp;</div>
+                <div class="col-lg-8">
+                    <div class="panel">
+                        <div class="panel-heading border-bottom">
+                            <h2>Login...</h2>
+                        </div>
+                        <div class="panel-body">
+                            <form ng-submit="Login()" name="UserLogin">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Phone Number</label>
+                                            <input type="text" class="form-control" ng-model="Login.PhoneNumber">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Password</label>
+                                            <input type="password" class="form-control" ng-model="Login.Password">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary pull-right col-sm-12"><i class="fa fa-unlock"></i>&nbsp;LogIn</button>
+                            </form>
+                            <div class="clearfix">
+                                <span>
+                                    If you are not register, Please <a href="@Url.Action("Registration","User")">cleck here.</a>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </footer>
+                <div class="col-lg-2">&nbsp;</div>
+            </div>
+            
         </div>
     </div>
-    <!--   Core JS Files   -->
-    <script src="~/js/core/jquery.min.js" type="text/javascript"></script>
-    <script src="~/js/core/popper.min.js" type="text/javascript"></script>
-    <script src="~/angularjs/angular.min.js" type="text/ng-template">
-    </script>
-    <script src="~/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-    <script src="~/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-    <!-- Chartist JS -->
-    <script src="~/js/plugins/chartist.min.js"></script>
-    <!--  Notifications Plugin    -->
-    <script src="~/js/plugins/bootstrap-notify.js"></script>
-    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="~/js/material-dashboard.min.js" type="text/javascript"></script>
-    @*@RenderSection("Scripts", required: false)*@
-</body>
-</html>
+</section>

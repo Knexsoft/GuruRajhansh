@@ -1,4 +1,5 @@
 ﻿using MLM.Business.Models.ReqModels;
+using MLM.Business.Models.ViewModels;
 using MLM.Business.Utilities;
 using MLM.DataLayer.EntityModel;
 using System;
@@ -9,7 +10,7 @@ namespace MLM.Business.Abstracts
 {
     public interface IMembershipService
     {
-        MembershipContext ValidateUser(string username, string password);
+        UserView ValidateUser(string username, string password);
         User CreateUser(RegistrationRequest regReq);
         User GetUser(int userId);
     }

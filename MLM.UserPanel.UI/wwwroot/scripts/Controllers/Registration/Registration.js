@@ -30,7 +30,6 @@
             ConfirmPassword: _user.ConfirmPassword
         };
         UserServices.CreateNewUser(oUser).then(function (response) {
-            debugger;
             $scope.$parent.Preloader = false;
             $scope.User = null;
         }, function (error) {

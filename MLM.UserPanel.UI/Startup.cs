@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -18,6 +19,7 @@ using MLM.DataLayer;
 using MLM.DataLayer.Abstracts;
 using MLM.DataLayer.Infrastructure;
 using MLM.DataLayer.Repositories;
+using MLM.UserPanel.UI.Utilities;
 
 namespace MLM.UserPanel.UI
 {
@@ -33,12 +35,11 @@ namespace MLM.UserPanel.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/User/Login";
+                });
 
             services.AddDbContext<MLMDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -48,6 +49,16 @@ namespace MLM.UserPanel.UI
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IMembershipService, MembershipService>();
             services.AddScoped<IEncryptionService, EncryptionService>();
+            services.AddScoped<ISessionHandler, SessionHandler>();
+            services.AddTransient<SessionHandler>();
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(5);
+                options.Cookie.HttpOnly = true;
+            });
             services.AddMvc().AddXmlSerializerFormatters().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -64,13 +75,11 @@ namespace MLM.UserPanel.UI
                 app.UseHsts();
             }
 
-            string AppRootPath = env.ContentRootPath; //Application Base Path
-            string WebRootPath = env.WebRootPath;  //wwwroot folder path
-
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

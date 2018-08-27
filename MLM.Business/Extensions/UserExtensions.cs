@@ -1,4 +1,5 @@
-﻿using MLM.DataLayer.Abstracts;
+﻿using MLM.Business.Models.ViewModels;
+using MLM.DataLayer.Abstracts;
 using MLM.DataLayer.EntityModel;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,19 @@ namespace MLM.Business.Extensions
                 user.ActiveToken = tokenKey;
                 userRepository.Update(user, tokenKey);
             }               
+        }
+
+        public static UserView GetUserView(this User user)
+        {
+            var obj = new UserView();
+            obj.FullName = string.Format("{0} {1}", user.FirstName, user.LastName);
+            obj.MobileNumber = user.ContactNumber;
+            obj.City = user.City;
+            obj.EmailID = user.EmailID;
+            obj.Gender = user.Gender;
+            obj.ParentSponserID = user.ParentSponserID;
+            obj.SponserID = user.SponserID;
+            return obj;
         }
     }
 }
