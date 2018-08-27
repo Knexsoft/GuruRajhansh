@@ -74,18 +74,15 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="#navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right main-nav">
-                                <li class="active"><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="services.html">Services</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li class="active"><a href='@Url.Action("Index","Home")'>Home</a></li>
+                                <li><a href='@Url.Action("Index","AboutUs")'>About</a></li>
+                                <li><a href='@Url.Action("Index","BusinessPlan")'> Business Plan</a></li>
+                                <li><a href='@Url.Action("Index","Contact")'>Contact</a></li>
                                 <li class="dropdown dropdown-toggle">
-                                    <a href="#" data-toggle="dropdown">Dropdown <span><i class="fa fa-angle-down"></i></span></a>
+                                    <a href="#" data-toggle="dropdown">Join Now <span><i class="fa fa-angle-down"></i></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Awesome Features</a></li>
-                                        <li><a href="#">Clean Interface</a></li>
-                                        <li><a href="#">Available Possibilities</a></li>
-                                        <li><a href="#">Responsive Design</a></li>
-                                        <li><a href="#">Pixel Perfect Graphics</a></li>
+                                        <li><a href="#">Login</a></li>
+                                        <li><a href="#">Registration</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -95,7 +92,9 @@
                     <!-- .container -->
                 </nav>
                 <!-- .nav -->
-                @RenderBody()
+                <div>
+                    @RenderBody()
+                </div>
                 <footer class="footer">
                     <!-- Footer Widget Section -->
                     <div class="footer-widget-section">
@@ -108,16 +107,16 @@
                                 </div><!-- /.col-sm-4 -->
                                 <div class="col-md-8">
                                     <div class="footer-text">
-                                        <p>Assertively architect synergistic platforms vis-a-vis premium results. Synergistically facilitate high-payoff e-services rather than top-line sources. Collaboratively drive market positioning infomediaries without real-time e-commerce.</p>
+                                        <p>Assertively architect synergistic platforms vis-a-vis premium results.</p>
                                         <ul>
                                             <li class="phone">
-                                                <i class="fa fa-volume-control-phone" aria-hidden="true"></i> 1-677-124-44227
+                                                <i class="fa fa-volume-control-phone" aria-hidden="true"></i> 91- 983748283
                                                 <small><i class="fa fa-clock-o" aria-hidden="true"></i> Mon - Sat 8.00 - 18.00h</small>
                                             </li>
                                             <li class="address">
                                                 <address>
                                                     <i class="fa fa-map-pin" aria-hidden="true"></i>
-                                                    437 S Olive St, Los Angeles
+                                                    437 Jaipur Rajasthan India
                                                 </address>
                                             </li>
                                         </ul>
@@ -128,14 +127,14 @@
                     </div><!-- /.Footer Widget Section -->
                     <div class="copyright-section">
                         <div class="container clearfix">
-                            <span class="copytext">Copyright &copy; 2016 | <a href="https://uicookies.com/downloads/marketer-bootstrap-html5-advertising-agency-website-template/">Marketer</a> Designed And Developed By: <strong style="color:#4d6de3">uiCookies.com</strong></span>
+                            <span class="copytext">Copyright &copy; 2018 | <a href="#">gururajhansh</a> Designed And Developed By: <strong style="color:#4d6de3">abc.com</strong></span>
                             <ul class="list-inline pull-right">
-                                <li class="active"><a href="#">Home</a></li>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Services</a></li>
-                                <li><a href="#">Portfolio</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Contact</a></li>
+
+                                <li class="active"><a href='@Url.Action("Index","Home")'>Home</a></li>
+                                <li><a href='@Url.Action("Index","AboutUs")'>About</a></li>
+                                <li><a href='@Url.Action("Index","BusinessPlan")'> Business Plan</a></li>
+                                <li><a href='@Url.Action("Index","Contact")'>Contact</a></li>
+
                             </ul>
                         </div><!-- .container -->
                     </div><!-- .copyright-section -->
@@ -153,10 +152,10 @@
             <div>
                 <div>
                     <ul id="menu">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href='@Url.Action("Index","Home")'>Home</a></li>
+                        <li><a href='@Url.Action("Index","AboutUs")'>About</a></li>
+                        <li><a href='@Url.Action("Index","BusinessPlan")'> Business Plan</a></li>
+                        <li><a href='@Url.Action("Index","Contact")'>Contact</a></li>
                     </ul>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 ﻿
 app.component('userTable', {
     bindings: {},
-    templateUrl: 'userTable.html',
+    templateUrl: 'scripts/Components/UserTable/userTable.html',
     controllerAs: 'vm',
     controller: ['$scope', function ($scope) {
         var vm = this;
@@ -463,7 +463,6 @@ app.component('userTable', {
                 "$112,000"
             ]
         ]
-
 
         $scope.dataTableOpt = {
             //custom datatable options 
