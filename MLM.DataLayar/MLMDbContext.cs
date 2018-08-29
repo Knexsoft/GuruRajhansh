@@ -38,6 +38,7 @@ namespace MLM.DataLayer
             new LevelIncomeConfiguration(modelBuilder.Entity<LevelIncome>());
             new LevelIncomeTypeConfiguration(modelBuilder.Entity<LevelIncomeType>());
         }
+
         #endregion
     }
 }

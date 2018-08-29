@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MLM.DataLayer.Migrations
 {
-    public partial class AlterUser : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -65,14 +65,13 @@ namespace MLM.DataLayer.Migrations
                     ContactNumber = table.Column<string>(maxLength: 10, nullable: false),
                     EmailID = table.Column<string>(maxLength: 100, nullable: true),
                     Gender = table.Column<string>(maxLength: 10, nullable: false),
-                    DOB = table.Column<DateTime>(nullable: false),
                     City = table.Column<string>(maxLength: 100, nullable: false),
                     UserRole = table.Column<string>(maxLength: 10, nullable: false),
                     PasswordSalt = table.Column<string>(maxLength: 100, nullable: false),
                     HashPassword = table.Column<string>(maxLength: 100, nullable: false),
                     ParentSponserID = table.Column<int>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
-                    ActiveToken = table.Column<string>(nullable: true),
+                    ActiveToken = table.Column<string>(maxLength: 8, nullable: true),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false)

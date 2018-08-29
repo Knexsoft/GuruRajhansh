@@ -10,6 +10,11 @@
         UserServices.Login(oUser).then(function (respone) {
             $scope.$parent.Preloader = false;
             if (respone.data != null) {
+                if (('localStorage' in $window) && $window['localStorage'] !== null) {
+                    $localStorage.clear();
+                } else {
+                    $localStorage.setItem("user", JSON.stringify(respone.data));
+                }
                 $window.location.href = '/dashboard';
             }
         }, function (error) {

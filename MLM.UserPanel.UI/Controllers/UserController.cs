@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MLM.Business.Abstracts;
 using MLM.Business.Extensions;
 using MLM.Business.Models.ReqModels;
+using MLM.Business.Utilities;
 using MLM.DataLayer.Abstracts;
 using MLM.DataLayer.EntityModel;
 using System;
@@ -22,6 +23,7 @@ namespace MLM.UserPanel.UI.Controllers
         private readonly IMembershipService _membershipService;
         private readonly IBaseRepository<User> _userRepository;
         private readonly ISessionHandler _sessionHandler;
+        private readonly UserUtilities _userUtilities = new UserUtilities(); // added by SB
 
         public UserController(IMembershipService membershipService, IBaseRepository<User> userRepository, ISessionHandler sessionHandler)
         {
@@ -125,6 +127,22 @@ namespace MLM.UserPanel.UI.Controllers
         {
             await HttpContext.SignOutAsync();
             return Ok();
+        }
+
+        // added by SB 29-28-2018
+        [AllowAnonymous]
+        [HttpGet("GetUserBySponserID")]
+        public ActionResult GetUserBySponserID(int sponserID)
+        {
+            try
+            {
+                var _allUsers = _userUtilities.GetAllUsersBySponserId(sponserID);
+                return Content(_allUsers.ToString());
+            }
+            catch(Exception ex)
+            {
+                return new ContentResult { Content = ex.Message, StatusCode = (int)HttpStatusCode.BadRequest, ContentType = "text/plain" };
+            }
         }
     }
 }
