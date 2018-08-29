@@ -4,6 +4,7 @@ app.controller("ctrLayout", ["$scope", "$window", "UserServices", function ($sco
     $scope.Logout = function () {
         var isLogout = confirm("Are you sure you want to logout?");
         if (isLogout === true) {
+            localStorage.clear();
             UserServices.Logout().then(function (response) {
                 debugger;
                 if (response.status == 200) {

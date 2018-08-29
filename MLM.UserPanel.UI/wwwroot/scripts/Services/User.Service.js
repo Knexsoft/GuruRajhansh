@@ -35,4 +35,14 @@ app.service('UserServices', ['$http', function ($http) {
             url: "/user/Logout"
         });
     }
+
+    // added by SB 29-28-2018
+    rm.GetAllUserBySponserID = function () {
+        return $http({
+            method: 'GET',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: "/user/GetUserBySponserID",
+            params: sponserID
+        });
+    }
 }])

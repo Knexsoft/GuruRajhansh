@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MLM.DataLayer.Migrations
 {
     [DbContext(typeof(MLMDbContext))]
-    [Migration("20180809123039_0.0.1")]
-    partial class _001
+    [Migration("20180829083318_initialMigration")]
+    partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -160,7 +160,8 @@ namespace MLM.DataLayer.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ActiveToken");
+                    b.Property<string>("ActiveToken")
+                        .HasMaxLength(8);
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -171,8 +172,6 @@ namespace MLM.DataLayer.Migrations
                         .HasMaxLength(10);
 
                     b.Property<DateTime>("CreatedOn");
-
-                    b.Property<DateTime>("DOB");
 
                     b.Property<string>("EmailID")
                         .HasMaxLength(100);
