@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "AddFranchise";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddFranchise</h2>
+<section title="Add New Franchise">
+    <div class="panel">
+        <div class="panel-heading">
+            <h4><i class="fa fa-handshake"></i>&nbsp;Franchise Requests</h4>
+        </div>
+        <div class="panel-body">
+            <form>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Select Pins</label>
+                            <br />
+                            <select>
+                                <option>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Free Pins</label>
+                            <input type="text" placeholder="Free Pins" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Total Amount</label>
+                            <input type="text" placeholder="Total Amount" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>&nbsp;</label><br />
+                        <input type="submit" value="Submit" />
+                        <input type="button" value="Cancel" onclick="location.href='/FranchiseIncome';" title="Cancel"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
