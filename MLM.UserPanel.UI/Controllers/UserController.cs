@@ -156,6 +156,6 @@ namespace MLM.UserPanel.UI.Controllers
             Random _random = new Random();
             int _num = _random.Next(10000000, 99999999);
             return _num.ToString();
-        }
+        } 
     }
 }

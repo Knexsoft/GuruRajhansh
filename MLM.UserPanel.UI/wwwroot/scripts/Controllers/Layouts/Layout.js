@@ -10,7 +10,7 @@ app.controller("ctrLayout", ["$scope", "$window", "UserServices", function ($sco
                 if (response.status == 200) {
                     $window.location.href = 'user/Login';
                 }
-            }, function (error) {
+            }, function (error) { 
                 alert(error);
             })
         }

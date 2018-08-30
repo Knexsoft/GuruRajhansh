@@ -65,7 +65,7 @@ namespace MLM.Business.Utilities
                     Console.WriteLine("No rows found.");
                 }
                 reader.Close();
-            }
+            } 
             catch (Exception ex)
             {
                 throw ex;

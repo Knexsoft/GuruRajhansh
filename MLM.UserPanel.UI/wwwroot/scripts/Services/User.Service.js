@@ -41,7 +41,7 @@ app.service('UserServices', ['$http', function ($http) {
         return $http({
             method: 'GET',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            url: "/user/GetUserBySponserID?sponserID=" + sponserID
+            url: "/user/GetUserBySponserID?sponserID=" + sponserID 
         });
     }
 }])

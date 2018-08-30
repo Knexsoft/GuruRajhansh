@@ -14,7 +14,7 @@ app.component('userTable', {
             UserServices.GetAllUserBySponserID(this.sponserID).then(function (response) {
                 if (response.data != null) {
                     $scope.data = response.data;
-                    $scope.data.Role = oUser.userRole;
+                    $scope.data.Role = oUser.userRole; 
                 }
             },
                 function (error) {
