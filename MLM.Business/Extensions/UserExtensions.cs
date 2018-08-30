@@ -36,6 +36,7 @@ namespace MLM.Business.Extensions
             obj.ParentSponserID = user.ParentSponserID;
             obj.SponserID = user.SponserID;
             obj.UserRole = user.UserRole;
+            obj.UserID = user.ID.ToString();
             return obj;
         }
     }

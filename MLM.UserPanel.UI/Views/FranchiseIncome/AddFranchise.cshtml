@@ -1,46 +1,45 @@
-﻿
+﻿@model MLM.Business.Models.ReqModels.FranchiseIncomeReq
 @{
     ViewData["Title"] = "AddFranchise";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>AddFranchise</h2>
-<section title="Add New Franchise">
+<section title="Add New Franchise" ng-controller="ctrFranchise">
     <div class="panel">
         <div class="panel-heading">
             <h4><i class="fa fa-handshake"></i>&nbsp;Franchise Requests</h4>
         </div>
         <div class="panel-body">
-            <form>
+            <form ng-submit="addFranchise()" name="AddNewFranchise">
                 <div class="row">
                     <div class="col-lg-3">
+                        <input type="hidden" ng-model="FranchiseIncomeReq.FranchiseIncomeTypeID" value=""/>
                         <div class="form-group">
                             <label>Select Pins</label>
                             <br />
-                            <select>
-                                <option>10</option>
-                                <option>20</option>
-                                <option>50</option>
-                                <option>100</option>
+                            <select  ng-model="FranchiseIncomeReq.Pins" ng-init="getFranchiseIncomeType()" ng-change="changeItem(FranchiseIncomeReq.Pins)">
+                                <option ng-repeat="pin in Pins" value="{{pin.value}}">{{pin.key}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Free Pins</label>
-                            <input type="text" placeholder="Free Pins" readonly="readonly" />
+                            <input type="text" placeholder="Free Pins" value="" readonly="readonly"  ng-model="FranchiseIncomeReq.FreePins"/>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Total Amount</label>
-                            <input type="text" placeholder="Total Amount" readonly="readonly" />
+                            <input type="text" placeholder="Total Amount" value="" readonly="readonly"  ng-model="FranchiseIncomeReq.Amount"/>
+                            
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <label>&nbsp;</label><br />
-                        <input type="submit" value="Submit" />
-                        <input type="button" value="Cancel" onclick="location.href='/FranchiseIncome';" title="Cancel"/>
+                        <button type="submit" class="btn btn-primary btn-sm font-weight-bold"><i class="fa fa-user"></i>&nbsp;Submit</button>
+                        <input type="button" value="Cancel" class="btn btn-default btn-sm font-weight-bold" onclick="location.href='/FranchiseIncome';" title="Cancel" />
                     </div>
                 </div>
             </form>

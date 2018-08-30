@@ -6,7 +6,6 @@ app.controller("ctrLayout", ["$scope", "$window", "UserServices", function ($sco
         if (isLogout === true) {
             localStorage.clear();
             UserServices.Logout().then(function (response) {
-                debugger;
                 if (response.status == 200) {
                     $window.location.href = 'user/Login';
                 }

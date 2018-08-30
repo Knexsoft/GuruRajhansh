@@ -24,6 +24,7 @@ namespace MLM.UserPanel.UI.Controllers
         private readonly IBaseRepository<User> _userRepository;
         private readonly ISessionHandler _sessionHandler;
         private readonly UserUtilities _userUtilities = new UserUtilities(); // added by SB
+        private readonly UserPinUtilities _userPinUtilities = new UserPinUtilities();
 
         public UserController(IMembershipService membershipService, IBaseRepository<User> userRepository, ISessionHandler sessionHandler)
         {
@@ -136,17 +137,12 @@ namespace MLM.UserPanel.UI.Controllers
         {
             try
             {
-<<<<<<< HEAD
                 if (sponserID > 0)
                 {
                     var _allUsers = _userUtilities.GetAllUsersBySponserId(sponserID);
                     return Ok(_allUsers);
                 }
                 return BadRequest();
-=======
-                var _allUsers = _userUtilities.GetAllUsersBySponserId(sponserID);
-                return new JsonResult(_allUsers);
->>>>>>> 300d46c5e00c744c463a6a29294f1b63afe6be68
             }
             catch (Exception ex)
             {
@@ -156,11 +152,12 @@ namespace MLM.UserPanel.UI.Controllers
 
         [AllowAnonymous]
         [HttpGet("GetTokenNumber")]
-        public string GetTokenNumber()
+        public IActionResult GetTokenNumber(Guid sponserID)
         {
             Random _random = new Random();
             int _num = _random.Next(10000000, 99999999);
-            return _num.ToString();
+            _userPinUtilities.AddTokenNumber(sponserID,_num);
+            return RedirectToAction("Index","Dashboard");
         } 
     }
 }

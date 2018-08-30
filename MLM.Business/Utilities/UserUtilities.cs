@@ -13,23 +13,25 @@ namespace MLM.Business.Utilities
     public class UserUtilities
     {
         #region objects
-        //private readonly IBaseRepository<User> _userRepository;
-        //private readonly IUnitOfWork _unitOfWork;
+        private readonly IBaseRepository<User> _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Constructor
-        //public UserUtilities(IBaseRepository<User> userRepository, IUnitOfWork unitOfWork)
-        //{
-        //    _userRepository = userRepository;
-        //    _unitOfWork = unitOfWork;
-        //}
+        public UserUtilities() { }
+
+        public UserUtilities(IBaseRepository<User> userRepository, IUnitOfWork unitOfWork)
+        {
+            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
+        }
         #endregion
 
         #region Public Method
 
         public List<UserView> GetAllUsersBySponserId(int sponserID)
         {
-            String strConnString = "Data Source=kanha;Initial Catalog=MLM;Integrated Security=True";
+            String strConnString = "Data Source=LAPTOP-5B2JV023\\SQLEXPRESS;Initial Catalog=MLM;Integrated Security=True";
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
@@ -57,6 +59,7 @@ namespace MLM.Business.Utilities
                         _userDetail.EmailID = reader["EmailID"].ToString();
                         _userDetail.Gender = reader["Gender"].ToString();
                         _userDetail.ActiveToken = reader["ActiveToken"].ToString();
+                        _userDetail.UserRole = reader["UserRole"].ToString();
                         _userList.Add(_userDetail);
                     }
                 }
@@ -65,7 +68,7 @@ namespace MLM.Business.Utilities
                     Console.WriteLine("No rows found.");
                 }
                 reader.Close();
-            } 
+            }
             catch (Exception ex)
             {
                 throw ex;

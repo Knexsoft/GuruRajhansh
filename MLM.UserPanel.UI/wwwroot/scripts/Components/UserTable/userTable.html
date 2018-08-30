@@ -6,7 +6,7 @@
             <th>Mobile</th>
             <th>Gender</th>
             <th>City</th>
-            <th ng-if="user.userRole == 'Admin'">Token</th>
+            <th ng-if="userInRole == 'Admin'">Token</th>
         </tr>
     </thead>
     <tbody>
@@ -15,8 +15,8 @@
             <td>{{user.fullName}}</td>
             <td>{{user.mobileNumber}}</td>
             <td>{{user.gender}}</td>
-            <td>{{user.city}}</td> 
-            <td ng-if="user.userRole == 'Admin'"></td>
+            <td>{{user.city}}</td>  
+            <td ng-if="user.userRole == 'Admin'"><a href="/user/GetTokenNumber?sponserID={{user.userID}}" class="btn btn-sm btn-success">Create Token</a></td>
         </tr>
     </tbody>
 </table>

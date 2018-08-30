@@ -1,0 +1,18 @@
+﻿<table class="table table-bordered bordered table-striped table-condensed datatable" ui-jq="dataTable" ui-options="dataTableOpt">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Pins</th>
+            <th>Use Status</th>
+            <th>Created On</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="pin in data">
+            <td>{{$index+1}}</td>
+            <td>{{pin.pin}}</td>
+            <td>{{pin.isUsed}}</td>
+            <td>{{pin.createdOn}}</td>
+        </tr>
+    </tbody>
+</table>
