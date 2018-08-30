@@ -137,7 +137,7 @@ namespace MLM.UserPanel.UI.Controllers
             try
             {
                 var _allUsers = _userUtilities.GetAllUsersBySponserId(sponserID);
-                return Content(_allUsers.ToString());
+                return new JsonResult(_allUsers);
             }
             catch(Exception ex)
             {
