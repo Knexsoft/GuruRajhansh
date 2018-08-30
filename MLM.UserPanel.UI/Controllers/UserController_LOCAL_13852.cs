@@ -136,17 +136,12 @@ namespace MLM.UserPanel.UI.Controllers
         {
             try
             {
-<<<<<<< HEAD
                 if (sponserID > 0)
                 {
                     var _allUsers = _userUtilities.GetAllUsersBySponserId(sponserID);
                     return Ok(_allUsers);
                 }
                 return BadRequest();
-=======
-                var _allUsers = _userUtilities.GetAllUsersBySponserId(sponserID);
-                return new JsonResult(_allUsers);
->>>>>>> 300d46c5e00c744c463a6a29294f1b63afe6be68
             }
             catch (Exception ex)
             {
