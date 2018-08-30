@@ -3,25 +3,26 @@ app.component('userTable', {
     bindings: {},
     templateUrl: 'scripts/Components/UserTable/userTable.html',
     controllerAs: 'vm',
-    controller: ['$scope', 'UserService', function ($scope, UserService) {
+    controller: ['$scope', 'UserServices', function ($scope, UserServices) {
         var vm = this;
-        if (('localStorage' in $window) && $window['localStorage'] !== null)
-        {
+        $scope.data = null;
+        let sponserID = 0;
+        debugger;
+        if (localStorage.getItem("user") != null) {
+            var oUser = JSON.parse(localStorage.getItem('user'));
+            this.sponserID = oUser.sponserID;
+            UserServices.GetAllUserBySponserID(this.sponserID).then(function (response) {
+                if (response.data != null) {
+                    $scope.data = response.data;
+                    $scope.data.Role = oUser.userRole;
+                }
+            },
+                function (error) {
+                    alert(error);
+                });
+        }
 
-        }
-        let sponserId;
-        if ($localStorage.getItem('user')) {
-            sponserId = JSON.parse($localStorage.getItem('user'));
-        } else {
-            sponserId = 0;
-        }
-        UserService.GetAllUserBySponserID(sponserId).then(function (response) {
-            if (response.data != null) {
-                $scope.data = response.data;
-            }
-        }, function (error) {
-            alert(error);
-        });
+        
 
         $scope.dataTableOpt = {
             //custom datatable options 

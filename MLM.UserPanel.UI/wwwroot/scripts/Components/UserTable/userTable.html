@@ -3,20 +3,20 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Age</th>
-            <th>Start Date</th>
+            <th>Mobile</th>
+            <th>Gender</th>
+            <th>City</th>
+            <th ng-if="user.userRole == 'Admin'">Token</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="n in data">
+        <tr ng-repeat="user in data">
             <td>{{$index+1}}</td>
-            <td>{{n[0]}}</td>
-            <td>{{n[1]}}</td>
-            <td>{{n[2]}}</td>
-            <td>{{n[3]}}</td>
-            <td>{{n[4] | date:'dd/MM/yyyy'}}</td>
+            <td>{{user.fullName}}</td>
+            <td>{{user.mobileNumber}}</td>
+            <td>{{user.gender}}</td>
+            <td>{{user.city}}</td>
+            <td ng-if="user.userRole == 'Admin'"></td>
         </tr>
     </tbody>
 </table>

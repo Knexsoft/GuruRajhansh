@@ -132,17 +132,30 @@ namespace MLM.UserPanel.UI.Controllers
         // added by SB 29-28-2018
         [AllowAnonymous]
         [HttpGet("GetUserBySponserID")]
-        public ActionResult GetUserBySponserID(int sponserID)
+        public IActionResult GetUserBySponserID(int sponserID = 0)
         {
             try
             {
-                var _allUsers = _userUtilities.GetAllUsersBySponserId(sponserID);
-                return Content(_allUsers.ToString());
+                if (sponserID > 0)
+                {
+                    var _allUsers = _userUtilities.GetAllUsersBySponserId(sponserID);
+                    return Ok(_allUsers);
+                }
+                return BadRequest();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new ContentResult { Content = ex.Message, StatusCode = (int)HttpStatusCode.BadRequest, ContentType = "text/plain" };
             }
+        }
+
+        [AllowAnonymous]
+        [HttpGet("GetTokenNumber")]
+        public string GetTokenNumber()
+        {
+            Random _random = new Random();
+            int _num = _random.Next(10000000, 99999999);
+            return _num.ToString();
         }
     }
 }

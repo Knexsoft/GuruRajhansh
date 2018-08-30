@@ -48,6 +48,7 @@ namespace MLM.Business.Utilities
                     while (reader.Read())
                     {
                         UserView _userDetail = new UserView();
+                        _userDetail.UserID = reader["ID"].ToString();
                         _userDetail.SponserID = Convert.ToInt32(reader["SponserID"].ToString());
                         _userDetail.ParentSponserID = Convert.ToInt32(reader["ParentSponserID"].ToString());
                         _userDetail.FullName = string.Format("{0} {1}", reader["FirstName"].ToString(), reader["LastName"].ToString());
@@ -55,6 +56,7 @@ namespace MLM.Business.Utilities
                         _userDetail.MobileNumber = reader["ContactNumber"].ToString();
                         _userDetail.EmailID = reader["EmailID"].ToString();
                         _userDetail.Gender = reader["Gender"].ToString();
+                        _userDetail.ActiveToken = reader["ActiveToken"].ToString();
                         _userList.Add(_userDetail);
                     }
                 }

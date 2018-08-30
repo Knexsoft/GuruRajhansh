@@ -37,12 +37,11 @@ app.service('UserServices', ['$http', function ($http) {
     }
 
     // added by SB 29-28-2018
-    rm.GetAllUserBySponserID = function () {
+    rm.GetAllUserBySponserID = function (sponserID) {
         return $http({
             method: 'GET',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            url: "/user/GetUserBySponserID",
-            params: sponserID
+            url: "/user/GetUserBySponserID?sponserID=" + sponserID
         });
     }
 }])
