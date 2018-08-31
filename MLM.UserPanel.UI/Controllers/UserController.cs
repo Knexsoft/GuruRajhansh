@@ -158,6 +158,28 @@ namespace MLM.UserPanel.UI.Controllers
             int _num = _random.Next(10000000, 99999999);
             _userPinUtilities.AddTokenNumber(sponserID,_num);
             return RedirectToAction("Index","Dashboard");
-        } 
+        }
+
+        [Authorize]
+        [HttpGet("UserProfile")]
+        public IActionResult ViewProfile()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost("UserProfile")]
+        public IActionResult ViewProfile(UserProfile profile)
+        {
+            return View();
+        }
+
+        [HttpGet("GetProfile")]
+        public IActionResult GetProfile(Guid userID)
+        {
+            var _data = _userUtilities.GetUserProfile(userID);
+            return Ok(_data);
+        }
+
     }
 }

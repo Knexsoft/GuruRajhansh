@@ -1,4 +1,5 @@
 ﻿using MLM.Business.Abstracts;
+using MLM.Business.Models.ReqModels;
 using MLM.Business.Models.ViewModels;
 using MLM.DataLayer.Abstracts;
 using MLM.DataLayer.EntityModel;
@@ -79,6 +80,28 @@ namespace MLM.Business.Utilities
                 con.Dispose();
             }
             return _userList;
+        }
+
+        public User GetUserProfile(Guid guid)
+        {
+            var _userProfile = _userRepository.Get(guid);
+            return _userProfile;
+        }
+
+        public User UpdateUserProfile(UserProfile userProfile)
+        {
+            var _data = _userRepository.Get(userProfile.UserID);
+            if(_data != null)
+            {
+                _data.FirstName = userProfile.FirstName;
+                _data.LastName = userProfile.LastName;
+                _data.EmailID = userProfile.EmailID;
+                _data.Gender = userProfile.Gender;
+                _data.City = userProfile.City;
+                _userRepository.Update(_data, userProfile.UserID);
+                _unitOfWork.Commit();
+            }
+            return _data;
         }
 
         #endregion

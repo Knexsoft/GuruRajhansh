@@ -22,4 +22,10 @@ namespace MLM.Business.Models.ReqModels
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
     }
+
+    public class UserProfile : RegistrationRequest
+    {
+        public Guid UserID { get; set; }
+        public int SponserID { get; set; }
+    }
 }

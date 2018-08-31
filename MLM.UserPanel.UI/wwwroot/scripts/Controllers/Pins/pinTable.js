@@ -5,7 +5,6 @@
     controller: ['$scope', 'UserServices', function ($scope, UserServices) {
         var vm = this;
         $scope.data = null;
-        $scope.userInRole = null;
         let userID = 0;
         if (localStorage.getItem("user") != null) {
             var oUser = JSON.parse(localStorage.getItem('user'));

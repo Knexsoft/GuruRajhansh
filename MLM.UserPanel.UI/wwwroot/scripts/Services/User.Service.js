@@ -36,6 +36,25 @@ app.service('UserServices', ['$http', function ($http) {
         });
     }
 
+    // get userprofile
+    rm.GetUserProfile = function (userID) {
+        return $http({
+            method: 'GET',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: "/user/GetProfile?userID=" + userID
+        });
+    }
+
+    // update userprofile
+    rm.UpdateUserProfile = function (profile) {
+        return $http({
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: "/user/UserProfile",
+            params: profile
+        });
+    }
+
     // added by SB 29-28-2018
     rm.GetAllUserBySponserID = function (sponserID) {
         return $http({
