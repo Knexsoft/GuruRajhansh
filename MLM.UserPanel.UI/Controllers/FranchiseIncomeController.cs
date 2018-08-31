@@ -16,39 +16,59 @@ namespace MLM.UserPanel.UI.Controllers
     public class FranchiseIncomeController : Controller
     {
         private readonly IBaseRepository<FranchiseIncome> _franchiseIncomeRepository;
+        private readonly IBaseRepository<UserPin> _userPinRepository;
         private readonly FranchiseUtilities _franchiseUtilities = new FranchiseUtilities();
-        public FranchiseIncomeController(IBaseRepository<FranchiseIncome> franchiseIncomeRepository)
+        public FranchiseIncomeController(IBaseRepository<FranchiseIncome> franchiseIncomeRepository, IBaseRepository<UserPin> userPinRepository)
         {
             _franchiseIncomeRepository = franchiseIncomeRepository;
+            _userPinRepository = userPinRepository;
         }
 
-        [HttpGet]
+        [Route("")]
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpGet]
+        [Route("AddFranchise")]
         public IActionResult AddFranchise()
         {
-            FranchiseIncomeTypes();
-            GetFranchiseDetailByPin(10);
             return View();
         }
 
-        [HttpPost("AddFranchise")]
+        [HttpPost("NewFranchise")]
         public IActionResult AddFranchise(FranchiseIncomeReq oFranchise)
         {
             if (oFranchise.FrenchiseIncomeTypeID != 0)
             {
                 //_franchiseIncomeRepository
                 var _response = _franchiseUtilities.AddNewFrenchise(oFranchise);
-                _franchiseUtilities.CreateNewFrenchisePins(oFranchise, _response.ID, _response.UserID);
+                _franchiseIncomeRepository.Add(_response);
+                GenratePins(_response, oFranchise);
+             //   _franchiseUtilities.CreateNewFrenchisePins(_userPinRepository, oFranchise, _response.ID, _response.UserID);
             }
             return View();
         }
 
-        [HttpGet("GetFranchiseIncomeTypes")]
+
+        private void GenratePins(FranchiseIncome franchiseIncome, FranchiseIncomeReq model)
+        {
+            var _totalPins = model.Pins + model.FreePins;
+            for (int i = 0; i < _totalPins; i++)
+            {
+                var _userPin = new UserPin();
+                _userPin.ID = Guid.NewGuid();
+                _userPin.FranchiseIncomeID = franchiseIncome.ID.ToString();
+                _userPin.UserID = string.Empty;
+                _userPin.Pin = _franchiseUtilities.GetRandomPin();
+                _userPin.IsUsed = false;
+                _userPin.CreatedOn = DateTime.Now;
+                _userPinRepository.Add(_userPin);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetFranchiseIncomeTypes")]
         public IActionResult FranchiseIncomeTypes()
         {
             var allFranchiseIncomeType = FranchiseIncomeExtensions.GetAllFranchiseIncomeType();

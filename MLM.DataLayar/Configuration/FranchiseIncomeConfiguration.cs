@@ -22,7 +22,7 @@ namespace MLM.DataLayer.Configuration
 
             builder.HasOne(x => x.User).WithMany(x => x.FrenchiseIncomes).HasForeignKey(x => x.UserID);
             builder.HasOne(x => x.FranchiseIncomeType).WithMany(x => x.FranchiseIncomes).HasForeignKey(x => x.FranchiseIncomeTypeID);
-            builder.HasOne(x => x.UserPin).WithOne(x => x.FranchiseIncome);
+            //builder.HasOne(x => x.UserPin).WithOne(x => x.FranchiseIncome);
         }
     }
 

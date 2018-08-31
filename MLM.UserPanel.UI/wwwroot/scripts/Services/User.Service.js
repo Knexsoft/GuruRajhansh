@@ -59,7 +59,7 @@ app.service('UserServices', ['$http', function ($http) {
         return $http({
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            url: "/FranchiseIncome/AddFranchise",
+            url: "/FranchiseIncome/NewFranchise",
             params: oFranchise
         });
     }

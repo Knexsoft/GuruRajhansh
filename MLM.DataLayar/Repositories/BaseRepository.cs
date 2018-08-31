@@ -46,7 +46,7 @@ namespace MLM.DataLayer.Repositories
             return await _context.Set<T>().FindAsync(ID);
         }
 
-        public virtual T Add(T t)
+        public T Add(T t)
         {
             _context.Set<T>().Add(t);
             _context.SaveChanges();

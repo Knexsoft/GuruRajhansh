@@ -4,14 +4,16 @@ using MLM.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MLM.DataLayer.Migrations
 {
     [DbContext(typeof(MLMDbContext))]
-    partial class MLMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180831090602_1.0.1")]
+    partial class _101
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,15 +36,11 @@ namespace MLM.DataLayer.Migrations
 
                     b.Property<Guid>("UserID");
 
-                    b.Property<Guid?>("UserPinID");
-
                     b.HasKey("ID");
 
                     b.HasIndex("FranchiseIncomeTypeID");
 
                     b.HasIndex("UserID");
-
-                    b.HasIndex("UserPinID");
 
                     b.ToTable("FranchiseIncomes");
                 });
@@ -207,8 +205,6 @@ namespace MLM.DataLayer.Migrations
 
                     b.Property<int>("SponserID");
 
-                    b.Property<Guid?>("UserPinID");
-
                     b.Property<string>("UserRole")
                         .IsRequired()
                         .HasMaxLength(10);
@@ -217,8 +213,6 @@ namespace MLM.DataLayer.Migrations
 
                     b.HasIndex("SponserID")
                         .IsUnique();
-
-                    b.HasIndex("UserPinID");
 
                     b.ToTable("Users");
                 });
@@ -230,15 +224,21 @@ namespace MLM.DataLayer.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<string>("FranchiseIncomeID");
+                    b.Property<Guid>("FranchiseIncomeID");
 
                     b.Property<bool>("IsUsed");
 
                     b.Property<int>("Pin");
 
-                    b.Property<string>("UserID");
+                    b.Property<Guid>("UserID");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("FranchiseIncomeID")
+                        .IsUnique();
+
+                    b.HasIndex("UserID")
+                        .IsUnique();
 
                     b.ToTable("UserPins");
                 });
@@ -254,10 +254,6 @@ namespace MLM.DataLayer.Migrations
                         .WithMany("FrenchiseIncomes")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("MLM.DataLayer.EntityModel.UserPin", "UserPin")
-                        .WithMany()
-                        .HasForeignKey("UserPinID");
                 });
 
             modelBuilder.Entity("MLM.DataLayer.EntityModel.LevelIncome", b =>
@@ -286,11 +282,17 @@ namespace MLM.DataLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MLM.DataLayer.EntityModel.User", b =>
+            modelBuilder.Entity("MLM.DataLayer.EntityModel.UserPin", b =>
                 {
-                    b.HasOne("MLM.DataLayer.EntityModel.UserPin", "UserPin")
-                        .WithMany()
-                        .HasForeignKey("UserPinID");
+                    b.HasOne("MLM.DataLayer.EntityModel.FranchiseIncome", "FranchiseIncome")
+                        .WithOne("UserPin")
+                        .HasForeignKey("MLM.DataLayer.EntityModel.UserPin", "FranchiseIncomeID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MLM.DataLayer.EntityModel.User", "User")
+                        .WithOne("UserPin")
+                        .HasForeignKey("MLM.DataLayer.EntityModel.UserPin", "UserID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

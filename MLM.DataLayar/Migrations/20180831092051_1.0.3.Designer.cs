@@ -4,14 +4,16 @@ using MLM.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MLM.DataLayer.Migrations
 {
     [DbContext(typeof(MLMDbContext))]
-    partial class MLMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180831092051_1.0.3")]
+    partial class _103
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,6 +241,10 @@ namespace MLM.DataLayer.Migrations
                     b.Property<string>("UserID");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("UserID")
+                        .IsUnique()
+                        .HasFilter("[UserID] IS NOT NULL");
 
                     b.ToTable("UserPins");
                 });

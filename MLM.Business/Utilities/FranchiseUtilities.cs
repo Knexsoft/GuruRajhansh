@@ -36,25 +36,25 @@ namespace MLM.Business.Utilities
             _frenchiseIncome.FranchiseIncomeTypeID = model.FrenchiseIncomeTypeID;
             _frenchiseIncome.TotalAmount = model.Amount;
             _frenchiseIncome.Income = model.Amount;
-            _franchiseIncomeRepository.Add(_frenchiseIncome);
-            _unitOfWork.Commit();
+            _frenchiseIncome.CreatedOn = DateTime.Now;
+            //_franchiseIncomeRepository.Add(_frenchiseIncome);
+            //_unitOfWork.Commit();
             return _frenchiseIncome;
         }
 
-        public void CreateNewFrenchisePins(FranchiseIncomeReq model,Guid FranchiseIncomeID,Guid UserID)
+        public void CreateNewFrenchisePins(IBaseRepository<UserPin> userPinRepository, FranchiseIncomeReq model,Guid FranchiseIncomeID,Guid UserID)
         {
             var _totalPins = model.Pins + model.FreePins;
             for (int i = 0; i <= _totalPins; i++)
             {
                 var _userPin = new UserPin();
                 _userPin.ID = Guid.NewGuid();
-                _userPin.FranchiseIncomeID = FranchiseIncomeID;
-                _userPin.UserID = UserID;
+                _userPin.FranchiseIncomeID = FranchiseIncomeID.ToString();
+                _userPin.UserID = string.Empty;
                 _userPin.Pin = GetRandomPin();
                 _userPin.IsUsed = false;
                 _userPin.CreatedOn = DateTime.Now;
-                _userPinRepository.Add(_userPin);
-                _unitOfWork.Commit();
+                userPinRepository.Add(_userPin);
             }
         }
 
@@ -67,7 +67,8 @@ namespace MLM.Business.Utilities
 
         public ICollection<UserPin> GetPinListByUserID(Guid userID)
         {
-            var _list = _userPinRepository.FindAll(x => x.UserID == userID);
+            var _userId = userID.ToString();
+            var _list = _userPinRepository.FindAll(x => x.UserID == _userId);
             return _list;
         }
 

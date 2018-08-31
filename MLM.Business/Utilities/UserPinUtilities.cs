@@ -27,7 +27,7 @@ namespace MLM.Business.Utilities
 
         #region Public methods
 
-        public UserPin AddTokenNumber(Guid sponserID, int tokenNumber)
+        public UserPin AddTokenNumber(Guid userID, int tokenNumber)
         {
             try
             {
@@ -35,8 +35,8 @@ namespace MLM.Business.Utilities
                 var user = new UserPin()
                 {
                     ID = Id,
-                    FranchiseIncomeID = Guid.Parse("3EFE5C28-0AAD-4610-B22E-A3D4F94764D6"),
-                    UserID = sponserID,
+                    FranchiseIncomeID = string.Empty,
+                    UserID = userID.ToString(),
                     Pin = tokenNumber,
                     IsUsed = false,
                     CreatedOn = DateTime.Now

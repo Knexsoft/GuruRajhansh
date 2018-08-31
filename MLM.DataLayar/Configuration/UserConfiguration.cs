@@ -39,7 +39,7 @@ namespace MLM.DataLayer.Configuration
             builder.HasMany(x => x.SingleLegIncomes).WithOne(x => x.User);
             builder.HasMany(x => x.LevelIncomes).WithOne(x => x.User);
             builder.HasMany(x => x.FrenchiseIncomes).WithOne(x => x.User);
-            builder.HasOne(x => x.UserPin).WithOne(x => x.User);
+            //builder.HasOne(x => x.UserPin).WithOne(x => x.User);
         }
     }
 }

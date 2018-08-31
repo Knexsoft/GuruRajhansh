@@ -16,13 +16,12 @@ namespace MLM.DataLayer.Configuration
         public void Configure(EntityTypeBuilder<UserPin> builder)
         {
             builder.HasKey(x => x.ID);
-            builder.HasIndex(x => x.UserID).IsUnique();
             builder.Property(x => x.Pin).IsRequired();
             builder.Property(x => x.IsUsed).IsRequired();
             builder.Property(x => x.CreatedOn).IsRequired();
 
-            builder.HasOne(x => x.FranchiseIncome).WithOne(x => x.UserPin);
-            builder.HasOne(x => x.User).WithOne(x => x.UserPin).OnDelete(DeleteBehavior.Restrict);
+            //builder.HasOne(x => x.FranchiseIncome).WithOne(x => x.UserPin);
+            //builder.HasOne(x => x.User).WithOne(x => x.UserPin).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
