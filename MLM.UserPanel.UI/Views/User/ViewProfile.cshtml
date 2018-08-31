@@ -1,0 +1,88 @@
+﻿@model MLM.Business.Models.ReqModels.UserProfile
+@{
+    ViewData["Title"] = "ViewProfile";
+}
+<section ng-controller="ctrUserProfile" ng-init="ViewProfile()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading border-bottom">
+                    <h2>User Profile</h2>
+                </div>
+                <div class="panel-body">
+                    <form ng-submit="updateUserProfile()" name="UserProfile">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Sponser Number</label>
+                                    <input asp-for="SponserID" type="text" readonly="readonly" ng-model="UserProfile.SponserID">
+                                    <span asp-validation-for="SponserID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Sponser By</label>
+                                    <input type="text" readonly="readonly" ng-model="UserProfile.ParentSponserID">
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">First Name</label>
+                                    <input asp-for="FirstName" type="text"  ng-model="UserProfile.FirstName">
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Last Name</label>
+                                    <input asp-for="LastName" type="text"  ng-model="UserProfile.LastName">
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Mobile Number</label>
+                                    <input asp-for="MobileNumber" readonly="readonly" type="text"  ng-model="UserProfile.MobileNumber">
+                                    <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Email ID</label>
+                                    <input asp-for="EmailID" type="email" ng-model="UserProfile.EmailID">
+                                    <span asp-validation-for="EmailID" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Gender</label>
+                                    <select asp-for="Gender" ng-model="UserProfile.Gender">
+                                        <option ng-repeat="gender in Genders" value="{{gender.Value}}" ng-selected="{{gender.Selected}}">{{gender.Text}}</option>
+                                    </select>
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">City</label>
+                                    <input asp-for="City" type="text" ng-model="UserProfile.City">
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary pull-left font-weight-bold"><i class="fa fa-user"></i>&nbsp;Submit</button>
+                        <button type="reset" class="btn btn-danger pull-left" style="margin-left: 10px;"><i class="fa fa-close"></i>&nbsp;Cancel</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

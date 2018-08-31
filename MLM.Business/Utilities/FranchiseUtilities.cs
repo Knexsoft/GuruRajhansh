@@ -36,6 +36,7 @@ namespace MLM.Business.Utilities
             _frenchiseIncome.FranchiseIncomeTypeID = model.FrenchiseIncomeTypeID;
             _frenchiseIncome.TotalAmount = model.Amount;
             _frenchiseIncome.Income = model.Amount;
+            _frenchiseIncome.CreatedOn = DateTime.Now;
             _franchiseIncomeRepository.Add(_frenchiseIncome);
             _unitOfWork.Commit();
             return _frenchiseIncome;
