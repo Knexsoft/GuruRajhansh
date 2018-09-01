@@ -6,6 +6,7 @@ using MLM.DataLayer.Abstracts;
 using System.Data.SqlClient;
 using System.Data;
 using MLM.DataLayer.EntityModel;
+using MLM.Business.Common;
 
 namespace MLM.Business.Extensions
 {
@@ -14,16 +15,15 @@ namespace MLM.Business.Extensions
         private static SqlDataReader rdr = null;
         private static SqlCommand cmd = null;
         private static SqlConnection con = null;
+        private static string _connection = "Data Source=LAPTOP-5B2JV023\\SQLEXPRESS;Initial Catalog=MLM;Integrated Security=True";
 
-        public static List<KeyValuePair<string, string>> GetAllFranchiseIncomeType()
+        public static List<KeyValuePair<string, string>> FranchiseIncomeTypeList()
         {
             var _franchiseIncomeTypeList = new List<KeyValuePair<string, string>>();
-            //_franchiseIncomeTypeList.Add(new KeyValuePair<string, string>("-- Select --", "0"));
-            //List<FranchiseIncomeReq> _franchiseIncomeTypeList = new List<FranchiseIncomeReq>();
             try
             {
                 // Open connection to the database
-                string ConnectionString = "Data Source=kanha;Initial Catalog=MLM;Integrated Security=True";
+                string ConnectionString = _connection;
                 con = new SqlConnection(ConnectionString);
                 con.Open();
                 string CommandText = "SELECT * FROM FranchiseIncomeTypes";
@@ -53,13 +53,54 @@ namespace MLM.Business.Extensions
             return _franchiseIncomeTypeList;
         }
 
+        public static List<FranchiseIncomeType> GetAllFranchiseIncomeType()
+        {
+            var _franchiseIncomeTypeList = new List<FranchiseIncomeType>();
+            try
+            {
+                // Open connection to the database
+                string ConnectionString = _connection;
+                con = new SqlConnection(ConnectionString);
+                con.Open();
+                string CommandText = "SELECT * FROM FranchiseIncomeTypes";
+                cmd = new SqlCommand(CommandText);
+                cmd.Connection = con;
+                // Execute the query
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    FranchiseIncomeType _fit = new FranchiseIncomeType();
+                    _fit.FranchiseIncomeTypeID = Convert.ToInt32(rdr["FranchiseIncomeTypeID"].ToString());
+                    _fit.Pins = Convert.ToInt32(rdr["Pins"].ToString());
+                    _fit.FreePins = Convert.ToInt32(rdr["FreePins"].ToString());
+                    _fit.Amount = Convert.ToDecimal(rdr["Amount"].ToString());
+                    _franchiseIncomeTypeList.Add(_fit);
+                }
+                return _franchiseIncomeTypeList;
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+            finally
+            {
+                // Close data reader object and database connection
+                if (rdr != null)
+                    rdr.Close();
+
+                if (con.State == ConnectionState.Open)
+                    con.Close();
+            }
+            return _franchiseIncomeTypeList;
+        }
+
         public static FranchiseIncomeReq FindFranchiseIncomeTypeByPin(int oPin)
         {
             try
             {
                 FranchiseIncomeReq _frq = null;
                 // Open connection to the database
-                string ConnectionString = "Data Source=kanha;Initial Catalog=MLM;Integrated Security=True";
+                string ConnectionString = _connection;
                 con = new SqlConnection(ConnectionString);
                 con.Open();
                 string CommandText = "SELECT * FROM FranchiseIncomeTypes where Pins = '" + oPin + "'";
@@ -100,7 +141,7 @@ namespace MLM.Business.Extensions
                 var Id = Guid.NewGuid();
                 FranchiseIncomeReq _frq = null;
                 // Open connection to the database
-                string ConnectionString = "Data Source=kanha;Initial Catalog=MLM;Integrated Security=True";
+                string ConnectionString = _connection;
                 con = new SqlConnection(ConnectionString);
                 con.Open();
                 string CommandText = "INSERT INTO dbo.FranchiseIncomes (ID,UserID,FranchiseIncomeID,TotalAmount,Income,CreatedOn)" +
@@ -131,7 +172,7 @@ namespace MLM.Business.Extensions
             try
             {
                 // Open connection to the database
-                string ConnectionString = "Data Source=kanha;Initial Catalog=MLM;Integrated Security=True";
+                string ConnectionString = _connection;
                 con = new SqlConnection(ConnectionString);
                 con.Open();
                 string CommandText = "SELECT * FROM FranchiseIncomeTypes";

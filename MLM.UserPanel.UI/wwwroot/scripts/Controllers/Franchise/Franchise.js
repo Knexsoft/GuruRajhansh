@@ -1,13 +1,26 @@
 ﻿app.controller("ctrFranchise", ['$scope', 'UserServices', function ($scope, UserServices) {
     var oFranchise = {};
     $scope.Pins = {};
+    $scope.data = {};
+
+    $scope.franchiseIncomeTypesList = function () {
+        $scope.$parent.Preloader = true;
+        UserServices.FranchiseIncomeTypesList().then(function (response) {
+            $scope.$parent.Preloader = false;
+            if (response.data != null) {
+                $scope.Pins = response.data;
+            }
+        }, function (error) {
+            $scope.$parent.Preloader = false;
+        });
+    }
 
     $scope.getFranchiseIncomeType = function () {
         $scope.$parent.Preloader = true;
         UserServices.GetFranchiseIncomeTypes().then(function (response) {
             $scope.$parent.Preloader = false;
             if (response.data != null) {
-                $scope.Pins = response.data;
+                $scope.data = response.data;
             }
         }, function (error) {
             $scope.$parent.Preloader = false;

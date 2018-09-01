@@ -19,5 +19,10 @@ namespace MLM.Business.Common
         {
             return _config.Value.WebRootUrl;
         }
+
+        public string StringConnection()
+        {
+            return _config.Value.StringConnection;
+        }
     }
 }

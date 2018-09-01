@@ -32,6 +32,7 @@
         UserServices.CreateNewUser(oUser).then(function (response) {
             $scope.$parent.Preloader = false;
             $scope.User = null;
+            window.location.href = '/welcome';
         }, function (error) {
             $scope.$parent.Preloader = false;
         });

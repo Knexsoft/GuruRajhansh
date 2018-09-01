@@ -109,6 +109,12 @@ namespace MLM.UserPanel.UI.Controllers
             }
         }
 
+        [HttpGet("Welcome")]
+        public IActionResult Welcome()
+        {
+            return View();
+        }
+
         [HttpPost("UpdateToken")]
         public IActionResult UpdateUserToken(Guid userID, string tokenKey)
         {

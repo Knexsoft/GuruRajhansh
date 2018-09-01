@@ -68,6 +68,14 @@ namespace MLM.UserPanel.UI.Controllers
         }
 
         [HttpGet]
+        [Route("FranchiseIncomeTypesList")]
+        public IActionResult FranchiseIncomeTypesList()
+        {
+            var allFranchiseIncomeType = FranchiseIncomeExtensions.FranchiseIncomeTypeList();
+            return Ok(allFranchiseIncomeType);
+        }
+
+        [HttpGet]
         [Route("GetFranchiseIncomeTypes")]
         public IActionResult FranchiseIncomeTypes()
         {

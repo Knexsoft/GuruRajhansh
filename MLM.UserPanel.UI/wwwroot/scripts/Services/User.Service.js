@@ -64,7 +64,16 @@ app.service('UserServices', ['$http', function ($http) {
         });
     }
 
-    // get francise pin list
+    // get francise list for pin dropdown (key,value)
+    rm.FranchiseIncomeTypesList = function () {
+        return $http({
+            method: 'GET',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: "/FranchiseIncome/FranchiseIncomeTypesList"
+        });
+    }
+
+    // get francise Type
     rm.GetFranchiseIncomeTypes = function () {
         return $http({
             method: 'GET',
