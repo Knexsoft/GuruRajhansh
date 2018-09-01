@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MLM.DataLayer.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class _100 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,6 +52,22 @@ namespace MLM.DataLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SingleLegIncomeTypes", x => x.SingleLegIncomeID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserPins",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(nullable: false),
+                    FranchiseIncomeID = table.Column<string>(nullable: true),
+                    UserID = table.Column<string>(nullable: true),
+                    Pin = table.Column<int>(nullable: false),
+                    IsUsed = table.Column<bool>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserPins", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -168,34 +184,6 @@ namespace MLM.DataLayer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "UserPins",
-                columns: table => new
-                {
-                    ID = table.Column<Guid>(nullable: false),
-                    FranchiseIncomeID = table.Column<Guid>(nullable: false),
-                    UserID = table.Column<Guid>(nullable: false),
-                    Pin = table.Column<int>(nullable: false),
-                    IsUsed = table.Column<bool>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserPins", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_UserPins_FranchiseIncomes_FranchiseIncomeID",
-                        column: x => x.FranchiseIncomeID,
-                        principalTable: "FranchiseIncomes",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserPins_Users_UserID",
-                        column: x => x.UserID,
-                        principalTable: "Users",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_FranchiseIncomes_FranchiseIncomeTypeID",
                 table: "FranchiseIncomes",
@@ -234,18 +222,6 @@ namespace MLM.DataLayer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserPins_FranchiseIncomeID",
-                table: "UserPins",
-                column: "FranchiseIncomeID",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserPins_UserID",
-                table: "UserPins",
-                column: "UserID",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Users_SponserID",
                 table: "Users",
                 column: "SponserID",
@@ -254,6 +230,9 @@ namespace MLM.DataLayer.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "FranchiseIncomes");
+
             migrationBuilder.DropTable(
                 name: "LevelIncomes");
 
@@ -264,16 +243,13 @@ namespace MLM.DataLayer.Migrations
                 name: "UserPins");
 
             migrationBuilder.DropTable(
+                name: "FranchiseIncomeTypes");
+
+            migrationBuilder.DropTable(
                 name: "LevelIncomeTypes");
 
             migrationBuilder.DropTable(
                 name: "SingleLegIncomeTypes");
-
-            migrationBuilder.DropTable(
-                name: "FranchiseIncomes");
-
-            migrationBuilder.DropTable(
-                name: "FranchiseIncomeTypes");
 
             migrationBuilder.DropTable(
                 name: "Users");

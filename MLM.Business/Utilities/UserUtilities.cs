@@ -32,7 +32,7 @@ namespace MLM.Business.Utilities
 
         public List<UserView> GetAllUsersBySponserId(int sponserID)
         {
-            String strConnString = "Data Source=LAPTOP-5B2JV023\\SQLEXPRESS;Initial Catalog=MLM;Integrated Security=True";
+            String strConnString = "Data Source=kanha;Initial Catalog=MLM;Integrated Security=True";
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;

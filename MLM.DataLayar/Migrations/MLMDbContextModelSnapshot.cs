@@ -34,15 +34,11 @@ namespace MLM.DataLayer.Migrations
 
                     b.Property<Guid>("UserID");
 
-                    b.Property<Guid?>("UserPinID");
-
                     b.HasKey("ID");
 
                     b.HasIndex("FranchiseIncomeTypeID");
 
                     b.HasIndex("UserID");
-
-                    b.HasIndex("UserPinID");
 
                     b.ToTable("FranchiseIncomes");
                 });
@@ -207,8 +203,6 @@ namespace MLM.DataLayer.Migrations
 
                     b.Property<int>("SponserID");
 
-                    b.Property<Guid?>("UserPinID");
-
                     b.Property<string>("UserRole")
                         .IsRequired()
                         .HasMaxLength(10);
@@ -217,8 +211,6 @@ namespace MLM.DataLayer.Migrations
 
                     b.HasIndex("SponserID")
                         .IsUnique();
-
-                    b.HasIndex("UserPinID");
 
                     b.ToTable("Users");
                 });
@@ -254,10 +246,6 @@ namespace MLM.DataLayer.Migrations
                         .WithMany("FrenchiseIncomes")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("MLM.DataLayer.EntityModel.UserPin", "UserPin")
-                        .WithMany()
-                        .HasForeignKey("UserPinID");
                 });
 
             modelBuilder.Entity("MLM.DataLayer.EntityModel.LevelIncome", b =>
@@ -284,13 +272,6 @@ namespace MLM.DataLayer.Migrations
                         .WithMany("SingleLegIncomes")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MLM.DataLayer.EntityModel.User", b =>
-                {
-                    b.HasOne("MLM.DataLayer.EntityModel.UserPin", "UserPin")
-                        .WithMany()
-                        .HasForeignKey("UserPinID");
                 });
 #pragma warning restore 612, 618
         }

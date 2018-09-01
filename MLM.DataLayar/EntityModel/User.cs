@@ -28,7 +28,6 @@ namespace MLM.DataLayer.EntityModel
         public virtual ICollection<SingleLegIncome> SingleLegIncomes { get; set; }
         public virtual ICollection<LevelIncome> LevelIncomes { get; set; }
         public virtual ICollection<FranchiseIncome> FrenchiseIncomes { get; set; }
-        public virtual UserPin UserPin { get; set; }
     }
 
     public enum UserRole

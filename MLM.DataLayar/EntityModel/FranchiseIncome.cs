@@ -16,6 +16,6 @@ namespace MLM.DataLayer.EntityModel
 
         public virtual User User { get; set; }
         public virtual FranchiseIncomeType FranchiseIncomeType { get; set; }
-        public virtual UserPin UserPin { get; set; }
+       // public virtual UserPin UserPin { get; set; }
     }
 }

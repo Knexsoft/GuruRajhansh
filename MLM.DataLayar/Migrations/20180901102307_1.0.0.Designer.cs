@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MLM.DataLayer.Migrations
 {
     [DbContext(typeof(MLMDbContext))]
-    [Migration("20180831090602_1.0.1")]
-    partial class _101
+    [Migration("20180901102307_1.0.0")]
+    partial class _100
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,21 +224,15 @@ namespace MLM.DataLayer.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<Guid>("FranchiseIncomeID");
+                    b.Property<string>("FranchiseIncomeID");
 
                     b.Property<bool>("IsUsed");
 
                     b.Property<int>("Pin");
 
-                    b.Property<Guid>("UserID");
+                    b.Property<string>("UserID");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("FranchiseIncomeID")
-                        .IsUnique();
-
-                    b.HasIndex("UserID")
-                        .IsUnique();
 
                     b.ToTable("UserPins");
                 });
@@ -279,19 +273,6 @@ namespace MLM.DataLayer.Migrations
                     b.HasOne("MLM.DataLayer.EntityModel.User", "User")
                         .WithMany("SingleLegIncomes")
                         .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MLM.DataLayer.EntityModel.UserPin", b =>
-                {
-                    b.HasOne("MLM.DataLayer.EntityModel.FranchiseIncome", "FranchiseIncome")
-                        .WithOne("UserPin")
-                        .HasForeignKey("MLM.DataLayer.EntityModel.UserPin", "FranchiseIncomeID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("MLM.DataLayer.EntityModel.User", "User")
-                        .WithOne("UserPin")
-                        .HasForeignKey("MLM.DataLayer.EntityModel.UserPin", "UserID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

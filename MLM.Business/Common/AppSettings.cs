@@ -11,7 +11,7 @@ namespace MLM.Business.Common
         {
             get
             {
-                return "Data Source=LAPTOP-5B2JV023\\SQLEXPRESS;Initial Catalog=MLM;Integrated Security=True";
+                return "Data Source=kanha;Initial Catalog=MLM;Integrated Security=True";
             }
         }
     }
