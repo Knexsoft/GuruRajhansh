@@ -109,4 +109,12 @@ app.service('UserServices', ['$http', function ($http) {
             url: "/FranchiseIncome/PinsList?userID=" + userID,
         });
     }
+
+    rm.GenrateUserPinByUserID = function (userID) {
+        return $http({
+            method: 'GET',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: "/User/GenrateUserPin?userID=" + userID,
+        });
+    }
 }])

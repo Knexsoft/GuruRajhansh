@@ -59,7 +59,6 @@ namespace MLM.UserPanel.UI.Controllers
                 var _userPin = new UserPin();
                 _userPin.ID = Guid.NewGuid();
                 _userPin.FranchiseIncomeID = franchiseIncome.ID.ToString();
-                _userPin.UserID = string.Empty;
                 _userPin.Pin = _franchiseUtilities.GetRandomPin();
                 _userPin.IsUsed = false;
                 _userPin.CreatedOn = DateTime.Now;

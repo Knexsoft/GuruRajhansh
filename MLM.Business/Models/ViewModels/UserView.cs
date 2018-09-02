@@ -16,5 +16,6 @@ namespace MLM.Business.Models.ViewModels
         public string City { get; set; }
         public string ActiveToken { get; set; }
         public string UserRole { get; set; }
+        public bool IsUsed { get; set; }
     }
 }

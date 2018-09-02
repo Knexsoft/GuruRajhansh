@@ -22,7 +22,7 @@
                     <div class="col-lg-3">
                         <div class="form-group bmd-form-group">
                             <label class="bmd-label-static">Select Pins</label>
-                            <select class="form-control"  ng-model="FranchiseIncomeReq.Pins" ng-init="getFranchiseIncomeType()" ng-change="changeItem(FranchiseIncomeReq.Pins)">
+                            <select class="form-control"  ng-model="FranchiseIncomeReq.Pins" ng-init="franchiseIncomeTypesList()" ng-change="changeItem(FranchiseIncomeReq.Pins)">
                                 <option value="0" selected="selected">--Select--</option>
                                 <option ng-repeat="pin in Pins" value="{{pin.value}}" ng-selected="{{pin.value == '0'}}">{{pin.key}}</option>
                             </select>

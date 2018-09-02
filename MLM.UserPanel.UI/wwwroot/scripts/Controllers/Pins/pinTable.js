@@ -2,7 +2,7 @@
     bindings: {},
     templateUrl: 'scripts/Controllers/Pins/pinTable.html',
     controllerAs: 'vm',
-    controller: ['$scope', 'UserServices', function ($scope, UserServices) {
+    controller: ['$scope', '$route', 'UserServices', function ($scope, $route, UserServices) {
         var vm = this;
         $scope.data = null;
         let userID = 0;
@@ -19,10 +19,12 @@
                 });
         }
 
-        $scope.dataTableOpt = {
+        $scope.dataTableOpt = { 
             //custom datatable options 
-            // or load data through ajax call also
-            "aLengthMenu": [[10, 50, 100, -1], [10, 50, 100, 'All']],
+            // or load data through ajax call also 
+            "aLengthMenu": [[10, 50, 100, -1], [10, 50, 100, 'All']], 
         };
+
+       
     }]
 });

@@ -1,4 +1,5 @@
-﻿<table class="table table-bordered bordered table-striped table-condensed datatable" ui-jq="dataTable" ui-options="dataTableOpt">
+﻿
+<table class="table table-bordered bordered table-condensed datatable">
     <thead>
         <tr>
             <th>#</th>
@@ -6,17 +7,18 @@
             <th>Mobile</th>
             <th>Gender</th>
             <th>City</th>
-            <th ng-if="userInRole == 'Admin'">Token</th>
+            <th ng-if="userRole == 'Admin'">Token</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="user in data">
+        <tr ng-repeat="user in Users" ng-class="user.isUsed == true? 'active-object' : 'inactive-object'" >
             <td>{{$index+1}}</td>
             <td>{{user.fullName}}</td>
             <td>{{user.mobileNumber}}</td>
             <td>{{user.gender}}</td>
             <td>{{user.city}}</td>  
-            <td ng-if="userInRole == 'Admin'"><a href="/user/GetTokenNumber?sponserID={{user.userID}}" class="btn btn-sm btn-success">Create Token</a></td>
+            <td ng-if="!user.isUsed && userRole == 'Admin'"><a ng-click="GenratePin(user)" class="btn btn-sm btn-success">Create Token</a></td>
+            <td ng-if="user.isUsed && userRole == 'Admin'">Actived</td>
         </tr>
     </tbody>
 </table>

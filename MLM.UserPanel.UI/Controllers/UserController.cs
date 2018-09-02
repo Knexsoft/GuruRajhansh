@@ -22,15 +22,20 @@ namespace MLM.UserPanel.UI.Controllers
     {
         private readonly IMembershipService _membershipService;
         private readonly IBaseRepository<User> _userRepository;
+        private readonly IBaseRepository<UserPin> _userPinRepository;
         private readonly ISessionHandler _sessionHandler;
         private readonly UserUtilities _userUtilities = new UserUtilities(); // added by SB
         private readonly UserPinUtilities _userPinUtilities = new UserPinUtilities();
 
-        public UserController(IMembershipService membershipService, IBaseRepository<User> userRepository, ISessionHandler sessionHandler)
+        public UserController(IMembershipService membershipService, 
+            IBaseRepository<User> userRepository, 
+            IBaseRepository<UserPin> userPinRepository, 
+            ISessionHandler sessionHandler)
         {
             _membershipService = membershipService;
             _userRepository = userRepository;
             _sessionHandler = sessionHandler;
+            _userPinRepository = userPinRepository;
         }
 
         public IActionResult Index()
@@ -62,7 +67,8 @@ namespace MLM.UserPanel.UI.Controllers
                         var claims = new List<Claim>
                         {
                             new Claim(ClaimTypes.Name, user.FullName),
-                            new Claim(ClaimTypes.MobilePhone, user.MobileNumber)
+                            new Claim(ClaimTypes.MobilePhone, user.MobileNumber),
+                            new Claim(ClaimTypes.Authentication, user.ActiveToken)
                         };
                         ClaimsIdentity userIdentity = new ClaimsIdentity(claims, "login");
                         ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
@@ -157,13 +163,22 @@ namespace MLM.UserPanel.UI.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("GetTokenNumber")]
-        public IActionResult GetTokenNumber(Guid sponserID)
+        [HttpGet("GenrateUserPin")]
+        public IActionResult GenrateUserPin(string userID, string mobileNo)
         {
-            Random _random = new Random();
-            int _num = _random.Next(10000000, 99999999);
-            _userPinUtilities.AddTokenNumber(sponserID,_num);
-            return RedirectToAction("Index","Dashboard");
+            try
+            {
+                var obj = _userPinRepository.BindUserPin(userID);
+                if(obj != null)
+                {
+                   _userRepository.UpdateTokenByUserID(userID, obj.Pin);
+                }
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return new ContentResult { StatusCode = StatusCodes.Status500InternalServerError };
+            }
         }
 
         [Authorize]
