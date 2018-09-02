@@ -6,6 +6,7 @@ namespace MLM.Business.Models.ReqModels
 {
     public class FranchiseIncomeReq
     {
+        public string ID { get; set; }
         public int FrenchiseIncomeTypeID { get; set; }
         public int Pins { get; set; }
         public int FreePins { get; set; }

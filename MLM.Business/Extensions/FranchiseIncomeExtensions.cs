@@ -53,30 +53,30 @@ namespace MLM.Business.Extensions
             return _franchiseIncomeTypeList;
         }
 
-        public static List<FranchiseIncomeType> GetAllFranchiseIncomeType()
+        public static List<FranchiseIncomeReq> GetAllFranchiseIncomeType(Guid userID)
         {
-            var _franchiseIncomeTypeList = new List<FranchiseIncomeType>();
+            var _franchiseIncomeTypeList = new List<FranchiseIncomeReq>();
             try
             {
-                // Open connection to the database
-                string ConnectionString = _connection;
-                con = new SqlConnection(ConnectionString);
-                con.Open();
-                string CommandText = "SELECT * FROM FranchiseIncomeTypes";
-                cmd = new SqlCommand(CommandText);
+
+                SqlConnection con = new SqlConnection(_connection);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "sp_getFranchiseIncomes";
+                cmd.Parameters.Add("@userID", SqlDbType.UniqueIdentifier).Value = userID;
                 cmd.Connection = con;
+                con.Open();
                 // Execute the query
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    FranchiseIncomeType _fit = new FranchiseIncomeType();
-                    _fit.FranchiseIncomeTypeID = Convert.ToInt32(rdr["FranchiseIncomeTypeID"].ToString());
+                    FranchiseIncomeReq _fit = new FranchiseIncomeReq();
                     _fit.Pins = Convert.ToInt32(rdr["Pins"].ToString());
                     _fit.FreePins = Convert.ToInt32(rdr["FreePins"].ToString());
-                    _fit.Amount = Convert.ToDecimal(rdr["Amount"].ToString());
+                    _fit.Amount = Convert.ToDecimal(rdr["TotalAmount"].ToString());
+                    _fit.ID = rdr["ID"].ToString();
                     _franchiseIncomeTypeList.Add(_fit);
                 }
-                return _franchiseIncomeTypeList;
             }
             catch (Exception ex)
             {
@@ -88,8 +88,8 @@ namespace MLM.Business.Extensions
                 if (rdr != null)
                     rdr.Close();
 
-                if (con.State == ConnectionState.Open)
-                    con.Close();
+                //if (con.State == ConnectionState.Open)
+                    //con.Close();
             }
             return _franchiseIncomeTypeList;
         }
