@@ -18,22 +18,20 @@
     $scope.updateUserProfile = function () {
         $scope.$parent.Preloader = true;
         var _user = $scope.UserProfile;
-        
         if (localStorage.getItem("user") != null) {
             var oUser = JSON.parse(localStorage.getItem('user'));
             oUser = {
                 UserID: oUser.userID,
-                FirstName: _user.FirstName,
-                LastName: _user.LastName,
-                MobileNumber: _user.MobileNumber,
-                EmailID: _user.EmailID,
-                Gender: _user.Gender,
-                City: _user.City,
+                FirstName: $scope.FirstName,
+                LastName: $scope.LastName,
+                EmailID: $scope.EmailID,
+                Gender: $scope.Gender,
+                City: $scope.City
             };
-
             UserServices.UpdateUserProfile(oUser).then(function (response) {
                 $scope.$parent.Preloader = false;
-                $scope.UserProfile = null;
+                window.location.reload(true);
+                alert('Profile Updated Successfully !');
             }, function (error) {
                 $scope.$parent.Preloader = false;
             });
@@ -41,22 +39,20 @@
     }
 
     $scope.ViewProfile = function () {
-        debugger;
+        $scope.$parent.Preloader = true;
         if (localStorage.getItem("user") != null) {
             var oUser = JSON.parse(localStorage.getItem('user'));
-            this.userID = oUser.userID;
-            UserServices.GetUserProfile(this.userID).then(function (response) {
+            var userID = oUser.userID;
+            UserServices.GetUserProfile(userID).then(function (response) {
                 if (response.data != null) {
-                    alert(JSON.stringify(response.data));
-                    $scope.data = response.data;
-                    UserProfile.SponserID = response.data.SponserID;
-                    UserProfile.ParentSponserID = response.data.ParentSponserID;
-                    UserProfile.FirstName = response.data.FirstName;
-                    UserProfile.LastName = response.data.LastName;
-                    UserProfile.MobileNumber = response.data.MobileNumber;
-                    UserProfile.EmailID = response.data.EmailID;
-                    UserProfile.Gender = response.data.Gender;
-                    UserProfile.City = response.data.City;
+                    $scope.SponserID = response.data.sponserID;
+                    $scope.ParentSponserID = response.data.parentSponserID;
+                    $scope.FirstName = response.data.firstName;
+                    $scope.LastName = response.data.lastName;
+                    $scope.MobileNumber = response.data.mobileNumber;
+                    $scope.EmailID = response.data.emailID;
+                    $scope.Gender = response.data.gender;
+                    $scope.City = response.data.city;
                 }
             },
                 function (error) {

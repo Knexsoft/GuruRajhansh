@@ -90,11 +90,17 @@ namespace MLM.UserPanel.UI.Controllers
             return Ok(franchiseIncomeType);
         }
 
-        [HttpGet("Pins")]
-        public IActionResult PinsList(string userID)
+        [HttpGet("PinsList")]
+        public IActionResult PinsList(string franchiseIncomeTypeID)
         {
-            var _list = _franchiseUtilities.GetPinListByUserID(Guid.Parse(userID));
             return View();
+        }
+
+        [HttpGet("GetPinsByID")]
+        public IActionResult PinsByID(string franchiseIncomeTypeID)
+        {
+            var _list = _franchiseUtilities.GetPinListByFrenchiseID(franchiseIncomeTypeID);
+            return Ok(_list);
         }
     }
 }

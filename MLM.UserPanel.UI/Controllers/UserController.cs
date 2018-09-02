@@ -22,6 +22,7 @@ namespace MLM.UserPanel.UI.Controllers
     {
         private readonly IMembershipService _membershipService;
         private readonly IBaseRepository<User> _userRepository;
+        private readonly IBaseRepository<UserPin> _userPinRepository;
         private readonly ISessionHandler _sessionHandler;
         private readonly UserUtilities _userUtilities = new UserUtilities(); // added by SB
         private readonly UserPinUtilities _userPinUtilities = new UserPinUtilities();
@@ -100,7 +101,7 @@ namespace MLM.UserPanel.UI.Controllers
                 else
                 {
                     User user = this._membershipService.CreateUser(register);
-                    return Ok();
+                    return Ok(user);
                 }
             }
             catch (Exception ex)
@@ -162,7 +163,8 @@ namespace MLM.UserPanel.UI.Controllers
         {
             Random _random = new Random();
             int _num = _random.Next(10000000, 99999999);
-            _userPinUtilities.AddTokenNumber(sponserID,_num);
+            //_userPinUtilities.AddTokenNumber(sponserID,_num);
+            UserPinExtensions.AddTokenNumber(_userPinRepository, sponserID, _num);
             return RedirectToAction("Index","Dashboard");
         }
 
@@ -177,7 +179,8 @@ namespace MLM.UserPanel.UI.Controllers
         [HttpPost("UserProfile")]
         public IActionResult ViewProfile(UserProfile profile)
         {
-            return View();
+            UserExtensions.UpdateUserProfile(_userRepository, profile);
+            return Ok();
         }
 
         [HttpGet("GetProfile")]

@@ -11,7 +11,7 @@
         </div>
     </div>
 </section>
-<section class="franchiseIncomes">
+<section class="franchiseIncomes" ng-controller="ctrFranchise">
     <div class="panel">
         <div class="panel-heading">
             <h4><i class="fa fa-handshake"></i>&nbsp;Franchise Requests</h4>
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <table class="table table-bordered white-bg">
+            <table class="table table-bordered white-bg" ng-init="getFranchiseIncomeType()">
                 <thead>
                     <tr>
                         <th>Sr No</th>
@@ -33,10 +33,10 @@
                 <tbody>
                     <tr ng-repeat="fit in data">
                         <td>{{$index+1}}</td>
-                        <td>{{fit.Pins}}</td>
-                        <td>{{fit.FreePins}}</td>
-                        <td>{{fit.Amount}}</td>
-                        <td><a href="/Pins?oPin={{fit.FranchiseIncomeTypeID}}" class="btn btn-sm btn-success">View</a></td>
+                        <td>{{fit.pins}}</td>
+                        <td>{{fit.freePins}}</td>
+                        <td>{{fit.amount}}</td>
+                        <td><a href="/FranchiseIncome/PinsList?franchiseIncomeTypeID={{fit.franchiseIncomeTypeID}}" class="btn btn-sm btn-success">View</a></td>
                     </tr>
                 </tbody>
             </table>

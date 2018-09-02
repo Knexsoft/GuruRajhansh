@@ -2,6 +2,7 @@
     var oFranchise = {};
     $scope.Pins = {};
     $scope.data = {};
+    $scope.franchises = {};
 
     $scope.franchiseIncomeTypesList = function () {
         $scope.$parent.Preloader = true;
@@ -27,7 +28,23 @@
         });
     }
 
+    // pin list by frenchise Id
+    $scope.getPinListByFrenchiseID = function () {
+        $scope.$parent.Preloader = true;
+        var _queryString = location.search;
+        var _id = _queryString.split('=')[1];
+        UserServices.GetPinListByFrenchiseID(_id).then(function (response) {
+            $scope.$parent.Preloader = false;
+            if (response.data != null) {
+                $scope.franchises = response.data;
+            }
+        }, function (error) {
+            $scope.$parent.Preloader = false;
+        });
+    }
+
     $scope.addFranchise = function () {
+        $scope.$parent.Preloader = true;
         var _addFranchise = $scope.FranchiseIncomeReq;
         if (localStorage.getItem("user") != null) {
             var oUser = JSON.parse(localStorage.getItem('user'));
