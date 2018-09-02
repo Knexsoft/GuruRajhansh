@@ -106,7 +106,7 @@ namespace MLM.UserPanel.UI.Controllers
                 else
                 {
                     User user = this._membershipService.CreateUser(register);
-                    return Ok();
+                    return Ok(user);
                 }
             }
             catch (Exception ex)
@@ -192,7 +192,8 @@ namespace MLM.UserPanel.UI.Controllers
         [HttpPost("UserProfile")]
         public IActionResult ViewProfile(UserProfile profile)
         {
-            return View();
+            UserExtensions.UpdateUserProfile(_userRepository, profile);
+            return Ok();
         }
 
         [HttpGet("GetProfile")]

@@ -16,6 +16,7 @@ namespace MLM.Business.Utilities
         #region objects
         private readonly IBaseRepository<User> _userRepository;
         private readonly IUnitOfWork _unitOfWork;
+        String strConnString = "Data Source=LAPTOP-5B2JV023\\SQLEXPRESS;Initial Catalog=MLM;Integrated Security=True";
         #endregion
 
         #region Constructor
@@ -32,7 +33,6 @@ namespace MLM.Business.Utilities
 
         public List<UserView> GetAllUsersBySponserId(int sponserID)
         {
-            String strConnString = "Data Source=kanha;Initial Catalog=MLM;Integrated Security=True";
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
@@ -44,7 +44,6 @@ namespace MLM.Business.Utilities
             {
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
-                DataTable schemaTable = reader.GetSchemaTable();
                 if (reader.HasRows)
                 {
                     _userList = new List<UserView>();
@@ -83,16 +82,54 @@ namespace MLM.Business.Utilities
             return _userList;
         }
 
-        public User GetUserProfile(Guid guid)
+        public UserProfile GetUserProfile(Guid guid)
         {
-            var _userProfile = _userRepository.Get(guid);
-            return _userProfile;
+            //var _userProfile = _userRepository.Find(x => x.ID == guid);
+            // Open connection to the database
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            UserProfile _userDetail = null;
+            try
+            {
+                con.Open();
+                string CommandText = "SELECT * FROM Users where ID = '" + guid + "'";
+                cmd = new SqlCommand(CommandText);
+                cmd.Connection = con;
+                // Execute the query
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    _userDetail = new UserProfile();
+                    _userDetail.UserID =Guid.Parse(reader["ID"].ToString());
+                    _userDetail.SponserID = Convert.ToInt32(reader["SponserID"].ToString());
+                    _userDetail.ParentSponserID = Convert.ToInt32(reader["ParentSponserID"].ToString());
+                    _userDetail.FirstName = reader["FirstName"].ToString();
+                    _userDetail.LastName = reader["LastName"].ToString();
+                    _userDetail.City = reader["City"].ToString();
+                    _userDetail.MobileNumber = reader["ContactNumber"].ToString();
+                    _userDetail.EmailID = reader["EmailID"].ToString();
+                    _userDetail.Gender = reader["Gender"].ToString();
+                }
+                reader.Close();
+                return _userDetail;
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open)
+                    con.Close();
+            }
+            return _userDetail;
         }
 
         public User UpdateUserProfile(UserProfile userProfile)
         {
             var _data = _userRepository.Get(userProfile.UserID);
-            if(_data != null)
+            if (_data != null)
             {
                 _data.FirstName = userProfile.FirstName;
                 _data.LastName = userProfile.LastName;

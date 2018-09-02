@@ -1,4 +1,5 @@
-﻿using MLM.Business.Models.ViewModels;
+﻿using MLM.Business.Models.ReqModels;
+using MLM.Business.Models.ViewModels;
 using MLM.DataLayer.Abstracts;
 using MLM.DataLayer.EntityModel;
 using System;
@@ -50,6 +51,20 @@ namespace MLM.Business.Extensions
             obj.UserID = user.ID.ToString();
             obj.ActiveToken = string.IsNullOrEmpty(user.ActiveToken) ? "0" : "1";
             return obj;
+        }
+
+        public static void UpdateUserProfile(this IBaseRepository<User> userRepository, UserProfile profile)
+        {
+            var user = userRepository.Get(profile.UserID);
+            if (user != null)
+            {
+                user.FirstName = profile.FirstName;
+                user.LastName = profile.LastName;
+                user.EmailID = profile.EmailID;
+                user.Gender = profile.Gender;
+                user.City = profile.City;
+                userRepository.Update(user,profile.UserID);
+            }
         }
     }
 }

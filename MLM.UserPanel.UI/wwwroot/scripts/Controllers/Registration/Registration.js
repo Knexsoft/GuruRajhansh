@@ -19,7 +19,7 @@
         $scope.$parent.Preloader = true;
         var _user = $scope.User;
         oUser = {
-            ParentSponserID: _user.SponserID,
+            ParentSponserID: _user.ParentSponserID,
             FirstName: _user.FirstName,
             LastName: _user.LastName,
             MobileNumber: _user.MobileNumber,
@@ -32,7 +32,7 @@
         UserServices.CreateNewUser(oUser).then(function (response) {
             $scope.$parent.Preloader = false;
             $scope.User = null;
-            window.location.href = '/welcome';
+            window.location.href = 'user/Welcome';
         }, function (error) {
             $scope.$parent.Preloader = false;
         });

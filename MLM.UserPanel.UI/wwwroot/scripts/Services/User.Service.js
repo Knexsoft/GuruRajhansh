@@ -110,6 +110,15 @@ app.service('UserServices', ['$http', function ($http) {
         });
     }
 
+    // get Get PinList By FrenchiseID 
+    rm.GetPinListByFrenchiseID = function (_id) {
+        return $http({
+            method: 'GET',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: "/FranchiseIncome/GetPinsByID?franchiseIncomeTypeID=" + _id,
+        });
+    }
+
     rm.GenrateUserPinByUserID = function (userID) {
         return $http({
             method: 'GET',
