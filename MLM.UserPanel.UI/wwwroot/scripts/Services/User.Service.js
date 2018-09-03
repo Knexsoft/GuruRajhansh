@@ -74,11 +74,11 @@ app.service('UserServices', ['$http', function ($http) {
     }
 
     // get francise Type
-    rm.GetFranchiseIncomeTypes = function () {
+    rm.GetFranchiseIncomeTypes = function (userID) {
         return $http({
             method: 'GET',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            url: "/FranchiseIncome/GetFranchiseIncomeTypes"
+            url: "/FranchiseIncome/GetFranchiseIncomeTypes?userID=" + userID
         });
     }
 

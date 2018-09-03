@@ -76,9 +76,9 @@ namespace MLM.UserPanel.UI.Controllers
 
         [HttpGet]
         [Route("GetFranchiseIncomeTypes")]
-        public IActionResult FranchiseIncomeTypes()
+        public IActionResult FranchiseIncomeTypes(string userID)
         {
-            var allFranchiseIncomeType = FranchiseIncomeExtensions.GetAllFranchiseIncomeType();
+            var allFranchiseIncomeType = FranchiseIncomeExtensions.GetAllFranchiseIncomeType(Guid.Parse(userID));
             return Ok(allFranchiseIncomeType);
         }
 

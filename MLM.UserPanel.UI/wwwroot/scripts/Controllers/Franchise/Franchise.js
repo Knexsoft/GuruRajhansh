@@ -18,14 +18,17 @@
 
     $scope.getFranchiseIncomeType = function () {
         $scope.$parent.Preloader = true;
-        UserServices.GetFranchiseIncomeTypes().then(function (response) {
-            $scope.$parent.Preloader = false;
-            if (response.data != null) {
-                $scope.data = response.data;
-            }
-        }, function (error) {
-            $scope.$parent.Preloader = false;
-        });
+        if (localStorage.getItem("user") != null) {
+            var oUser = JSON.parse(localStorage.getItem('user'));
+            UserServices.GetFranchiseIncomeTypes(oUser.userID).then(function (response) {
+                $scope.$parent.Preloader = false;
+                if (response.data != null) {
+                    $scope.data = response.data;
+                }
+            }, function (error) {
+                $scope.$parent.Preloader = false;
+            });
+        }
     }
 
     // pin list by frenchise Id
