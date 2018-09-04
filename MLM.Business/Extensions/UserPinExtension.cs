@@ -25,6 +25,42 @@ namespace MLM.Business.Extensions
             return obj;
         }
 
+        public static bool ValidatePin(this IBaseRepository<UserPin> userPinRepository, int pin)
+        {
+            bool _flag = false;
+            var obj = userPinRepository.GetAll().FirstOrDefault(x => x.Pin == pin);
+            if (obj != null)
+            {
+                _flag = true;
+            }
+            return _flag;
+        }
+
+        public static bool ActivateAccountPin(this IBaseRepository<User> userRepository,int pin,Guid userID)
+        {
+            bool _flag = false;
+            var _oUser = userRepository.GetAll().FirstOrDefault(x => x.ID == userID);
+            if(_oUser != null)
+            {
+                _oUser.ActiveToken = pin.ToString();
+                _oUser.ModifiedOn = DateTime.Now;
+                userRepository.Update(_oUser, userID);
+                _flag = true;
+            }
+            return _flag;
+        }
+
+        public static void UpdatePin(this IBaseRepository<UserPin> userPinRepository, int pin,string userId)
+        {
+            var obj = userPinRepository.GetAll().FirstOrDefault(x => x.Pin == pin);
+            if (obj != null)
+            {
+                obj.IsUsed = true;
+                obj.UserID = userId;
+                userPinRepository.Update(obj, obj.ID);
+            }
+        }
+
         //Helper method
         private static int GenratePin()
         {

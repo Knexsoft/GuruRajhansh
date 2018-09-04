@@ -126,4 +126,24 @@ app.service('UserServices', ['$http', function ($http) {
             url: "/User/GenrateUserPin?userID=" + userID,
         });
     }
+
+    // Get Team Info By SponserID
+    rm.GetTeamInfoBySponserID = function (sponserID) {
+        return $http({
+            method: 'GET',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: "/User/GetTeamInfoBySponserID?sponserID=" + sponserID,
+        });
+    }
+
+    // ------------ activate pin --------------- 
+
+    // activate user pin
+    rm.ActivateAccountPin = function (pin, userID) {
+        return $http({
+            method: 'GET',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: "/UserPin/ActivateToken?pin=" + pin + "&userId=" + userID
+        });
+    }
 }])

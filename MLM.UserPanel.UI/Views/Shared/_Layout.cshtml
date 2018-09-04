@@ -72,8 +72,14 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/FranchiseIncome">
-                            <i class="fa fa-cog"></i>
+                            <i class="fa fa-money"></i>
                             <p>Franhise Income</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/SingleLegIncome">
+                            <i class="fa fa-money"></i>
+                            <p>Single Leg Income</p>
                         </a>
                     </li>
                 </ul>
@@ -96,8 +102,16 @@
                             @if (User.Claims.Where(x => x.Type == ClaimTypes.Authentication).Select(x => x.Value).FirstOrDefault() == "0")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" href="javascript:void;">
+                                    <a class="nav-link" href="/UserPin/Activate">
                                         <span class="btn btn-danger btn-sm"><i class="fa fa-key"></i><strong>Activate Your Id</strong> </span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="javascript:void;">
+                                        <i class="fa fa-key"></i><strong>Pin : {{_userpin}}</strong>
                                     </a>
                                 </li>
                             }
@@ -164,6 +178,9 @@
     <script src="@Url.Content("~/scripts/Components/UserTable/UserTable.js")"></script>
     <script src="@Url.Content("~/scripts/Controllers/Franchise/Franchise.js")"></script>
     <script src="@Url.Content("~/scripts/Controllers/User/User.js")"></script>
+    <script src="@Url.Content("~/scripts/Controllers/Dashboard/dashboard.js")"></script>
+    <script src="@Url.Content("~/scripts/Controllers/Pins/pin.js")"></script>
+    <script src="@Url.Content("~/scripts/Controllers/SingleLegIncome/SingleLegIncome.js")"></script>
 
 
 

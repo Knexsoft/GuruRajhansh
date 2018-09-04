@@ -101,7 +101,7 @@ namespace MLM.Business.Utilities
                 while (reader.Read())
                 {
                     _userDetail = new UserProfile();
-                    _userDetail.UserID =Guid.Parse(reader["ID"].ToString());
+                    _userDetail.UserID = Guid.Parse(reader["ID"].ToString());
                     _userDetail.SponserID = Convert.ToInt32(reader["SponserID"].ToString());
                     _userDetail.ParentSponserID = Convert.ToInt32(reader["ParentSponserID"].ToString());
                     _userDetail.FirstName = reader["FirstName"].ToString();
@@ -142,6 +142,46 @@ namespace MLM.Business.Utilities
             return _data;
         }
 
+        public DashboardView GetTeamInfoBySponserId(int sponserID)
+        {
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "spGetTeamDetail";
+            cmd.Parameters.Add("@sponserID", SqlDbType.Int).Value = sponserID;
+            cmd.Connection = con;
+            DashboardView _oDash = null;
+            try
+            {
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        _oDash = new DashboardView();
+                        _oDash.ActiveUsers = Convert.ToInt32(reader["ActiveUser"].ToString());
+                        _oDash.DeactiveUsers = Convert.ToInt32(reader["InactiveUser"].ToString());
+                        _oDash.TotalAmount = Convert.ToDecimal(reader["TotalIncome"].ToString());
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No rows found.");
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+            return _oDash;
+        }
         #endregion
     }
 }
