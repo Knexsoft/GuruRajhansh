@@ -23,6 +23,7 @@ namespace MLM.Business.Extensions
             if(oUser != null && !string.IsNullOrEmpty(pin.ToString()))
             {
                 oUser.ActiveToken = pin.ToString();
+                oUser.ModifiedOn = DateTime.Now;
                 userRepository.Update(oUser, id);
             }
         }
