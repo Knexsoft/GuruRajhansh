@@ -26,7 +26,6 @@ namespace MLM.DataLayer.EntityModel
         public bool IsDeleted { get; set; }
 
         public virtual ICollection<SingleLegIncome> SingleLegIncomes { get; set; }
-        public virtual ICollection<LevelIncome> LevelIncomes { get; set; }
         public virtual ICollection<FranchiseIncome> FrenchiseIncomes { get; set; }
     }
 

@@ -4,14 +4,16 @@ using MLM.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MLM.DataLayer.Migrations
 {
     [DbContext(typeof(MLMDbContext))]
-    partial class MLMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180904035513_1.0.2")]
+    partial class _102
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,8 +64,7 @@ namespace MLM.DataLayer.Migrations
 
             modelBuilder.Entity("MLM.DataLayer.EntityModel.LevelIncome", b =>
                 {
-                    b.Property<string>("UserID")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("UserID");
 
                     b.Property<DateTime>("CreatedOn");
 
@@ -241,6 +242,14 @@ namespace MLM.DataLayer.Migrations
 
                     b.HasOne("MLM.DataLayer.EntityModel.User", "User")
                         .WithMany("FrenchiseIncomes")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MLM.DataLayer.EntityModel.LevelIncome", b =>
+                {
+                    b.HasOne("MLM.DataLayer.EntityModel.User", "User")
+                        .WithMany("LevelIncomes")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

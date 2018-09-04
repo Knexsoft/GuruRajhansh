@@ -19,13 +19,11 @@ namespace MLM.DataLayer.Configuration
             builder.HasKey(x => x.ID);
             builder.HasKey(x => x.UserID);
             builder.Property(x => x.UserID).IsRequired();
-            builder.Property(x => x.LevelIncomeTypeID).IsRequired();
             builder.Property(x => x.Income).IsRequired();
             builder.Property(x => x.CreatedOn).IsRequired();
 
             //Relationship
-            builder.HasOne(x => x.User).WithMany(x => x.LevelIncomes).HasForeignKey(x => x.UserID);
-            builder.HasOne(x => x.LevelIncomeType).WithMany(x => x.LevelIncomes).HasForeignKey(x => x.LevelIncomeTypeID);
+            //builder.HasOne(x => x.User).WithMany(x => x.LevelIncomes).HasForeignKey(x => x.UserID);
 
         }
     }
@@ -45,7 +43,6 @@ namespace MLM.DataLayer.Configuration
             builder.Property(x => x.IncomePercentage).IsRequired();
 
             //Relationship
-            builder.HasMany(x => x.LevelIncomes).WithOne(x => x.LevelIncomeType);
         }
     }
 }
