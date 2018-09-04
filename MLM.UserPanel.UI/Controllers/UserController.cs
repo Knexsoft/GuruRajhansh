@@ -203,5 +203,13 @@ namespace MLM.UserPanel.UI.Controllers
             return Ok(_data);
         }
 
+        [HttpGet("GetTeamInfoBySponserID")]
+        public IActionResult GetTeamInfo(string sponserID)
+        {
+            var _dashData = _userUtilities.GetTeamInfoBySponserId(Convert.ToInt32(sponserID));
+            return Ok(_dashData);
+        }
+
+
     }
 }

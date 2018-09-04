@@ -12,11 +12,6 @@ namespace MLM.Business.Extensions
         {
             try
             {
-                //var user = userPinRepository.Find(x => x.ID == userID);
-                //if (user == null)
-                //{
-
-                //}
                 Guid Id = Guid.NewGuid();
                 var userPin = new UserPin()
                 {

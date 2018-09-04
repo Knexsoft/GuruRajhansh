@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Activate";
+}
+
+<h2>Activate Your Pin</h2>
+<section ng-controller="ctrPin">
+    <div class="container">
+        <form ng-submit="ActivatePin()" name="UserPin">
+            <div class="row">
+                <div class="col-4">
+                    <label>Enter Pin</label>
+                    <input type="number" maxlength="8" min="8" required ng-model="pin"/>
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                    <button type="reset" class="btn btn-sm btn-default">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+

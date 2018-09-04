@@ -6,40 +6,35 @@
 
 <h2>Single Leg Income</h2>
 
-<section title="Single leg income">
+<section title="Single leg income" ng-controller="ctrSingleLeg" ng-init="getSingleLeg()">
     <div class="panel">
         <div class="panel-heading">
             <h4><i class="fa fa-handshake"></i>&nbsp;Single leg income levels</h4>
         </div>
         <div class="panel-body">
-            <table>
-                <tr>
-                    <th>Level</th>
-                    <th>Total Directs</th>
-                    <th>Total teams</th>
-                    <th>Single Leg Amount</th>
-                    <th>Level Amount</th>
-                    <th>Total Income</th>
-                    <th>Level Completed </th>
-                </tr>
-                <tr>
-                    <td>Level 1</td>
-                    <td>0</td>
-                    <td>18</td>
-                    <td>50</td>
-                    <td>0</td>
-                    <td>50</td>
-                    <td>29/08/2018 10:12 AM</td>
-                </tr>
-                <tr>
-                    <td>Level 2</td>
-                    <td>1</td>
-                    <td>20</td>
-                    <td>70</td>
-                    <td>22.40</td>
-                    <td>92.40</td>
-                    <td>--</td>
-                </tr>
+            <table class="table table-bordered table-light">
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>Total Directs</th>
+                        <th>Total teams</th>
+                        <th>Single Leg Amount</th>
+                        <th>Level Amount</th>
+                        <th>Total Income</th>
+                        <th>Level Completed </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in _singleLeg">
+                        <td>Level {{$index+1}}</td>
+                        <td>{{data.totalDirects}}</td>
+                        <td>{{data.totalTeams}}</td>
+                        <td>{{data.singleLegAmounts}}</td>
+                        <td>{{data.levelAmount}}</td>
+                        <td>{{data.totalIncome}}</td>
+                        <td>{{data.levelComplated | date:'medium' }}</td>s
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
