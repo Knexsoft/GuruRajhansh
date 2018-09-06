@@ -10,6 +10,8 @@ using MLM.DataLayer.EntityModel;
 
 namespace MLM.UserPanel.UI.Controllers
 {
+    [Authorize]
+    [Route("[Controller]")]
     public class SingleLegIncomeController : Controller
     {
         private readonly IBaseRepository<SingleLegIncome> _singleLegIncomeRepository;
@@ -18,8 +20,6 @@ namespace MLM.UserPanel.UI.Controllers
             _singleLegIncomeRepository = singleLegIncomePinRepository;
         }
 
-        [Authorize]
-        [Route("[Controller]")]
         public IActionResult Index()
         {
             return View();

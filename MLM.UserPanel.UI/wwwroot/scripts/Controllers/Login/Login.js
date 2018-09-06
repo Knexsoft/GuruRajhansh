@@ -1,5 +1,6 @@
 ﻿app.controller("ctrLogin", ['$scope', '$window', 'UserServices', function ($scope, $window, UserServices) {
     var oUser = {};
+    $scope._flag = false;
     $scope.Login = function () {
         $scope.$parent.Preloader = true;
         var _user = $scope.Login;
@@ -16,7 +17,9 @@
             }
         }, function (error) {
             $scope.$parent.Preloader = false;
-            alert(error);
+            if (error.status == 401) {
+                $scope._flag = true;
+            }
         });
     }
 }]);

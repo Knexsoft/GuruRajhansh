@@ -12,46 +12,52 @@
 
 <h2>AddFranchise</h2>
 <section title="Add New Franchise" ng-controller="ctrFranchise">
-    <div class="panel">
-        @*<div class="panel-heading">
-            <h4><i class="fa fa-handshake"></i>&nbsp;Franchise Requests</h4>
-        </div>*@
-        <div class="panel-body m-5">
-            <form ng-submit="addFranchise()" name="AddNewFranchise">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="form-group bmd-form-group">
-                            <label class="bmd-label-static">Select Pins</label>
-                            <select class="form-control"  ng-model="FranchiseIncomeReq.Pins" ng-init="franchiseIncomeTypesList()" ng-change="changeItem(FranchiseIncomeReq.Pins)">
-                                <option value="0" selected="selected">--Select--</option>
-                                <option ng-repeat="pin in Pins" value="{{pin.value}}" ng-selected="{{pin.value == '0'}}">{{pin.key}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label>Free Pins</label>
-                            <br />
-                            <input class="form-control" type="text" placeholder="Free Pins" value="" readonly="readonly"  ng-model="FranchiseIncomeReq.FreePins"/>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label>Total Amount</label>
-                            <br />
-                            <input class="form-control" type="text" placeholder="Total Amount" value="" readonly="readonly" ng-model="FranchiseIncomeReq.Amount" />
+    <div class="container table-light">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    @*<div class="panel-heading">
+                <h4><i class="fa fa-handshake"></i>&nbsp;Franchise Requests</h4>
+            </div>*@
+                    <div class="panel-body m-5">
+                        <form ng-submit="addFranchise()" name="AddNewFranchise">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group bmd-form-group">
+                                        <label class="bmd-label-static">Select Pins</label>
+                                        <select class="form-control" ng-model="FranchiseIncomeReq.Pins" ng-init="franchiseIncomeTypesList()" ng-change="changeItem(FranchiseIncomeReq.Pins)" required>
+                                            <option value="0" selected="selected">--Select--</option>
+                                            <option ng-repeat="pin in Pins" value="{{pin.value}}" ng-selected="{{pin.value == '0'}}">{{pin.key}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Free Pins</label>
+                                        <br />
+                                        <input class="form-control" type="text" placeholder="Free Pins" value="" readonly="readonly" ng-model="FranchiseIncomeReq.FreePins" required/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Total Amount</label>
+                                        <br />
+                                        <input class="form-control" type="text" placeholder="Total Amount" value="" readonly="readonly" ng-model="FranchiseIncomeReq.Amount" required/>
 
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <input type="hidden" ng-model="FranchiseIncomeReq.FranchiseIncomeTypeID" value="" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input type="hidden" ng-model="FranchiseIncomeReq.FranchiseIncomeTypeID" value="" />
 
-                        <label>&nbsp;</label><br />
-                        <button type="submit" class="btn btn-primary btn-sm font-weight-bold"><i class="fa fa-user"></i>&nbsp;Submit</button>
-                        <input type="button" value="Cancel" class="btn btn-default btn-sm font-weight-bold" onclick="location.href='/FranchiseIncome';" title="Cancel" />
+                                    <label>&nbsp;</label><br />
+                                    <button type="submit" class="btn btn-primary btn-sm font-weight-bold"><i class="fa fa-user"></i>&nbsp;Submit</button>
+                                    <input type="button" value="Cancel" class="btn btn-default btn-sm font-weight-bold" onclick="location.href='/FranchiseIncome';" title="Cancel" />
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </section>

@@ -211,6 +211,13 @@ namespace MLM.UserPanel.UI.Controllers
             return Ok(_dashData);
         }
 
+        [AllowAnonymous]
+        [HttpGet("GetParentInfoBySponserID")]
+        public IActionResult GetParentInfoBySponserID(int sponserID)
+        {
+            var _userInfo = UserExtensions.GetParentInfoBySponserID(_userRepository, sponserID);
+            return Ok(_userInfo);
+        }
 
     }
 }

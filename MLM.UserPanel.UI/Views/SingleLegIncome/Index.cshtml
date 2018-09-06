@@ -6,13 +6,13 @@
 
 <h2>Single Leg Income</h2>
 
-<section title="Single leg income" ng-controller="ctrSingleLeg" ng-init="getSingleLeg()">
+<section title="Single leg income" ng-controller="ctrSingleLeg">
     <div class="panel">
         <div class="panel-heading">
             <h4><i class="fa fa-handshake"></i>&nbsp;Single leg income levels</h4>
         </div>
         <div class="panel-body">
-            <table class="table table-bordered table-light">
+            <table class="table table-bordered table-light" ng-init="getSingleLeg()">
                 <thead>
                     <tr>
                         <th>Level</th>
@@ -29,10 +29,10 @@
                         <td>Level {{$index+1}}</td>
                         <td>{{data.totalDirects}}</td>
                         <td>{{data.totalTeams}}</td>
-                        <td>{{data.singleLegAmounts}}</td>
-                        <td>{{data.levelAmount}}</td>
+                        <td>{{data.singleLegIncomeAmount}}</td>
+                        <td>{{data.levelIncomeAmount}}</td>
                         <td>{{data.totalIncome}}</td>
-                        <td>{{data.levelComplated | date:'medium' }}</td>s
+                        <td>{{data.levelCompleteDate | date:'medium' }}</td>
                     </tr>
                 </tbody>
             </table>

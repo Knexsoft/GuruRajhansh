@@ -50,7 +50,7 @@ namespace MLM.Business.Extensions
             obj.SponserID = user.SponserID;
             obj.UserRole = user.UserRole;
             obj.UserID = user.ID.ToString();
-            obj.ActiveToken = string.IsNullOrEmpty(user.ActiveToken) ? "0" : "1";
+            obj.ActiveToken = string.IsNullOrEmpty(user.ActiveToken) ? "0" : user.ActiveToken;
             return obj;
         }
 
@@ -66,6 +66,12 @@ namespace MLM.Business.Extensions
                 user.City = profile.City;
                 userRepository.Update(user,profile.UserID);
             }
+        }
+
+        public static User GetParentInfoBySponserID(this IBaseRepository<User> userRepository,int sponserID)
+        {
+            var userInfo = userRepository.GetAll().FirstOrDefault(x => x.SponserID == sponserID);
+            return userInfo;
         }
     }
 }

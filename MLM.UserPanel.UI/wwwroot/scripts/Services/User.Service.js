@@ -136,6 +136,15 @@ app.service('UserServices', ['$http', function ($http) {
         });
     }
 
+    // Get parent info By SponserID
+    rm.GetParentInfoBySponserID = function (sponserID) {
+        return $http({
+            method: 'GET',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: "/User/GetParentInfoBySponserID?sponserID=" + sponserID,
+        });
+    }
+
     // ------------ activate pin --------------- 
 
     // activate user pin
