@@ -16,7 +16,7 @@
             }
         }, function (error) {
             $scope.$parent.Preloader = false;
-            alert(error)
+            alert(error);
         });
     }
 }]);

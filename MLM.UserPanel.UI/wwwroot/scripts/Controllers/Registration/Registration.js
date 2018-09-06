@@ -1,4 +1,4 @@
-﻿app.controller("ctrRegistration", ['$scope', 'UserServices', function ($scope, UserServices) {
+﻿app.controller("ctrRegistration", ['$scope', '$window', 'UserServices', function ($scope, $window, UserServices) {
     var oUser = {};
     $scope.Genders = [{
         Text: '--Select--',
@@ -32,7 +32,7 @@
         UserServices.CreateNewUser(oUser).then(function (response) {
             $scope.$parent.Preloader = false;
             $scope.User = null;
-            window.location.href = 'user/Welcome';
+            $window.location.href = '/user/welcome';
         }, function (error) {
             $scope.$parent.Preloader = false;
         });

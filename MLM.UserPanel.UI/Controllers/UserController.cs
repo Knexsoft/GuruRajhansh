@@ -115,6 +115,7 @@ namespace MLM.UserPanel.UI.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet("Welcome")]
         public IActionResult Welcome()
         {
