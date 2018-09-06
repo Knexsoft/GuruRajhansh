@@ -67,5 +67,11 @@ namespace MLM.Business.Extensions
                 userRepository.Update(user,profile.UserID);
             }
         }
+
+        public static User GetParentInfoBySponserID(this IBaseRepository<User> userRepository,int sponserID)
+        {
+            var userInfo = userRepository.GetAll().FirstOrDefault(x => x.SponserID == sponserID);
+            return userInfo;
+        }
     }
 }

@@ -33,14 +33,16 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Sponser Number</label>
-                                    <input asp-for="ParentSponserID" type="text" class="form-control" ng-model="User.ParentSponserID" required>
+                                    <input asp-for="ParentSponserID" type="text" ng-blur="getParentSponserInfo()" class="form-control" ng-model="User.ParentSponserID" name="sponserID" required>
                                     <span asp-validation-for="ParentSponserID" class="text-danger"></span>
+                                    <span style="color:red" ng-if="UserRegistration.sponserID.$error.required && UserRegistration.sponserID.$dirty">SponserID is required field</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Sponser By</label>
-                                    <input type="text" class="form-control" ng-model="User.SponserBy" required>
+                                    <input type="text" class="form-control" ng-model="User.SponserBy" name="SponserBy" required>
+                                    <span style="color:red" ng-if="UserRegistration.SponserBy.$error.required && UserRegistration.SponserBy.$dirty">SponserBy is required field</span>
                                     <span class="text-danger"></span>
                                 </div>
                             </div>
@@ -49,8 +51,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">First Name</label>
-                                    <input asp-for="FirstName" type="text" class="form-control" ng-model="User.FirstName" required>
+                                    <input asp-for="FirstName" type="text" name="firstname" class="form-control" ng-model="User.FirstName" required>
                                     <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    <span style="color:red" ng-if="UserRegistration.firstname.$error.required && UserRegistration.firstname.$dirty">FirstName is required field</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -65,15 +68,21 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Mobile Number</label>
-                                    <input asp-for="MobileNumber" type="text" class="form-control" ng-model="User.MobileNumber" required>
+                                    <input asp-for="MobileNumber" type="text" name="MobileNumber" ng-pattern="/^\+?\d{10}$/" class="form-control" ng-model="User.MobileNumber" required>
                                     <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                                    <span style="color:red" ng-show="UserRegistration.MobileNumber.$dirty && UserRegistration.MobileNumber.$invalid">
+                                        <span ng-show="UserRegistration.PhoneNumber.$error.required">Enter phone number.</span>
+                                    </span>
+                                    <span style="color:red" ng-show="UserRegistration.MobileNumber.$error.pattern">Please enter a 10 digit number</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Email ID</label>
-                                    <input asp-for="EmailID" type="email" class="form-control" ng-model="User.EmailID" required>
+                                    <input asp-for="EmailID" type="email" ng-pattern="eml_add" name="EmailID" class="form-control" ng-model="User.EmailID" required>
                                     <span asp-validation-for="EmailID" class="text-danger"></span>
+                                    <span style="color:red" ng-if="UserRegistration.EmailID.$error.required && UserRegistration.EmailID.$dirty">Email is required field</span>
+                                    <span style="color:red" ng-show="UserRegistration.EmailID.$error.email">Invalid Email</span>
                                 </div>
                             </div>
                         </div>
@@ -81,17 +90,19 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Gender</label>
-                                    <select asp-for="Gender" class="form-control" ng-model="User.Gender">
+                                    <select asp-for="Gender" class="form-control" ng-model="User.Gender" name="gender">
                                         <option ng-repeat="gender in Genders" value="{{gender.Value}}" ng-selected="{{gender.Selected}}">{{gender.Text}}</option>
                                     </select>
                                     <span asp-validation-for="Gender" class="text-danger"></span>
+                                    <span style="color:red" ng-if="UserRegistration.gender.$error.required && UserRegistration.gender.$dirty">Select gender</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">City</label>
-                                    <input asp-for="City" type="text" class="form-control" ng-model="User.City" required>
+                                    <input asp-for="City" type="text" class="form-control" name="city" ng-model="User.City" required>
                                     <span asp-validation-for="City" class="text-danger"></span>
+                                    <span style="color:red" ng-if="UserRegistration.city.$error.required && UserRegistration.city.$dirty">City is required field</span>
                                 </div>
                             </div>
                         </div>
@@ -99,19 +110,21 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Password</label>
-                                    <input asp-for="Password" type="password" class="form-control" ng-model="User.Password" required>
+                                    <input asp-for="Password" type="password" class="form-control" name="password" ng-model="User.Password" required>
                                     <span asp-validation-for="Password" class="text-danger"></span>
+                                    <span style="color:red" ng-if="UserRegistration.password.$error.required && UserRegistration.password.$dirty">Password is required field</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Confirm Password</label>
-                                    <input asp-for="ConfirmPassword" type="password" class="form-control" ng-model="User.ConfirmPassword" required>
+                                    <input asp-for="ConfirmPassword" type="password" name="cpassword" class="form-control" compare-to="UserRegistration.password" ng-model="User.ConfirmPassword" required>
                                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                    <span style="color:red" ng-if="UserRegistration.cpassword.$error.required && UserRegistration.cpassword.$dirty">Confirm Password is required field</span>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary pull-left font-weight-bold"><i class="fa fa-user"></i>&nbsp;Submit</button>
+                        <button type="submit" class="btn btn-primary pull-left font-weight-bold" ng-disabled="UserRegistration.$invalid"><i class="fa fa-user"></i>&nbsp;Submit</button>
                         <button type="reset" class="btn btn-danger pull-left" style="margin-left: 10px;"><i class="fa fa-close"></i>&nbsp;Cancel</button>
                         <div class="clearfix"></div>
                     </form>
