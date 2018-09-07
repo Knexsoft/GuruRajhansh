@@ -13,9 +13,10 @@ namespace MLM.DataLayer.EntityModel
         public decimal TotalAmount { get; set; }
         public Decimal Income { get; set; }
         public DateTime CreatedOn { get; set; }
+        public bool IsActive { get; set; }
 
         public virtual User User { get; set; }
         public virtual FranchiseIncomeType FranchiseIncomeType { get; set; }
-       // public virtual UserPin UserPin { get; set; }
+        // public virtual UserPin UserPin { get; set; }
     }
 }

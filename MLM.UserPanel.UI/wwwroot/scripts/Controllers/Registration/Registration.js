@@ -1,6 +1,7 @@
 ﻿app.controller("ctrRegistration", ['$scope', 'UserServices', function ($scope, UserServices) {
     var oUser = {};
     $scope.eml_add = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    var _flag = true;
     $scope.Genders = [{
         Text: '--Select--',
         Value: null,
@@ -42,14 +43,15 @@
     
     $scope.getParentSponserInfo = function () {
         $scope.$parent.Preloader = true;
-        var _sponserID = $scope.User.ParentSponserID;
-        var arr = $scope.User.ParentSponserID;
-        if (arr.length >= 6) {
-            alert($scope.User.ParentSponserID);
+        var _sponserID = $scope.User.ParentSponserID == null ? '' : $scope.User.ParentSponserID;
+        if (_sponserID.length >= 6 && _sponserID != null) {
             UserServices.GetParentInfoBySponserID(_sponserID).then(function (response) {
                 $scope.$parent.Preloader = false;
                 if (response.data != null) {
-                    $scope.User.SponserBy = response.data.firstName + ' ' + response.data.lastName;
+                    var _fname = response.data == '' ? '' : response.data.firstName;
+                    var _lname = response.data == '' ? '' : response.data.lastName;
+                    $scope.User.SponserBy = _fname + ' ' + _lname;
+                    $scope.isReadOnly();
                 }
             }, function (error) {
                 $scope.$parent.Preloader = false;
@@ -57,5 +59,8 @@
         }
         $scope.$parent.Preloader = false;
     }
-   
+
+    $scope.isReadOnly = function () {
+        return $scope._flag;
+    }
 }]);

@@ -16,13 +16,13 @@
                         <thead>
                             <tr>
                                 <th>Sr No</th>
-                                <th>Total Pins</th>
-                                <th>Is Used Pin</th>
+                                <th>Pins</th>
+                                <th>Pin Status</th>
                                 <th>Buy Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="fit in franchises">
+                            <tr ng-repeat="fit in franchises" ng-class="fit.isUsed == true? 'inactive-object': 'active-object'">
                                 <td>{{$index+1}}</td>
                                 <td>{{fit.pin}}</td>
                                 <td>{{fit.isUsed === false ? 'Active Key' : 'Key Used'}}</td>
