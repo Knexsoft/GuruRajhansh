@@ -29,10 +29,10 @@
                         <td>Level {{$index+1}}</td>
                         <td>{{data.totalDirects}}</td>
                         <td>{{data.totalTeams}}</td>
-                        <td>{{data.singleLegIncomeAmount}}</td>
-                        <td>{{data.levelIncomeAmount}}</td>
-                        <td>{{data.totalIncome}}</td>
-                        <td>{{data.levelCompleteDate | date:'medium' }}</td>
+                        <td>{{data.singleLegIncomeAmount | currency:"INR "}}</td>
+                        <td>{{data.levelIncomeAmount | currency:"INR "}}</td>
+                        <td>{{data.totalIncome | currency:"INR "}}</td>
+                        <td>{{data.levelCompleteDate | date:'short' }}</td>
                     </tr>
                 </tbody>
             </table>

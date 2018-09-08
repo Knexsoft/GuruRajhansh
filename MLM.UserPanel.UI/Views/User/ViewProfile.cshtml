@@ -3,7 +3,7 @@
     ViewData["Title"] = "ViewProfile";
 }
 <section ng-controller="ctrUserProfile">
-    <div class="row">
+    <div class="row table-light">
         <div class="col-md-12">
             <div class="panel">
                 <div class="panel-heading border-bottom">
@@ -11,71 +11,86 @@
                 </div>
                 <div class="panel-body" ng-init="ViewProfile()">
                     <form ng-submit="updateUserProfile()" name="UserProfile">
+                        
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="bmd-label-floating">Sponser Number</label>
-                                    <input type="text" readonly="readonly" ng-model="SponserID">
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-2 col-form-label">Sponser Number</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" readonly="readonly" disabled="disabled" ng-model="SponserID"> 
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="bmd-label-floating">Sponser By</label>
-                                    <input type="text" readonly="readonly" ng-model="ParentSponserID">
-                                    <span class="text-danger"></span>
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-2 col-form-label">Sponser By</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" readonly="readonly" disabled="disabled" ng-model="ParentSponserID">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="bmd-label-floating">First Name</label>
-                                    <input type="text" readonly="readonly" ng-model="FirstName">
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-2 col-form-label">First Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" readonly="readonly" disabled="disabled" ng-model="FirstName">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="bmd-label-floating">Last Name</label>
-                                    <input asp-for="LastName" type="text"  ng-model="LastName">
-                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-2 col-form-label">Last Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" ng-model="LastName" name="lastname" required>
+                                        <span style="color:red" ng-if="UserProfile.lastname.$error.required && UserProfile.lastname.$dirty">Last name is required</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="bmd-label-floating">Mobile Number</label>
-                                    <input asp-for="MobileNumber" readonly="readonly" type="text"  ng-model="MobileNumber">
-                                    <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-2 col-form-label">Mobile Number</label>
+                                    <div class="col-sm-10">
+                                        <input disabled="disabled" readonly="readonly" type="text" ng-model="MobileNumber">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="bmd-label-floating">Email ID</label>
-                                    <input asp-for="EmailID" type="email" ng-model="EmailID">
-                                    <span asp-validation-for="EmailID" class="text-danger"></span>
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-2 col-form-label">Email ID</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" ng-model="EmailID" name="email" required>
+                                        <span style="color:red" ng-if="UserProfile.email.$error.required && UserProfile.email.$dirty">Email id is required</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="bmd-label-floating">Gender</label>
-                                    <select asp-for="Gender" ng-model="Gender">
-                                        <option ng-repeat="gender in Genders" value="{{gender.Value}}" ng-selected="{{gender.Selected}}">{{gender.Text}}</option>
-                                    </select>
-                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-2 col-form-label">Gender</label>
+                                    <div class="col-sm-10">
+                                        <select ng-model="Gender" name="gender" required>
+                                            <option ng-repeat="gender in Genders" value="{{gender.Value}}" ng-selected="{{gender.Selected}}">{{gender.Text}}</option>
+                                        </select>
+                                        <span style="color:red" ng-if="UserProfile.gender.$error.required && UserProfile.gender.$dirty">Gender is required</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="bmd-label-floating">City</label>
-                                    <input asp-for="City" type="text" ng-model="City">
-                                    <span asp-validation-for="City" class="text-danger"></span>
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-2 col-form-label">City</label>
+                                    <div class="col-sm-10">
+                                        <input  type="text" ng-model="City" name="city" required>
+                                        <span style="color:red" ng-if="UserProfile.city.$error.required && UserProfile.city.$dirty">City is required</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary pull-left font-weight-bold"><i class="fa fa-user"></i>&nbsp;Submit</button>
+                        <button type="submit" class="btn btn-primary pull-left font-weight-bold" ng-disabled="UserProfile.$invalid"><i class="fa fa-user"></i>&nbsp;Submit</button>
                         <button type="reset" class="btn btn-danger pull-left" style="margin-left: 10px;"><i class="fa fa-close"></i>&nbsp;Cancel</button>
                         <div class="clearfix"></div>
                     </form>

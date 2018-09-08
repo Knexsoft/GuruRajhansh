@@ -17,7 +17,7 @@
             <td>{{user.mobileNumber}}</td>
             <td>{{user.gender}}</td>
             <td>{{user.city}}</td>  
-            <td ng-if="!user.isUsed && userRole == 'Admin'"><a ng-click="GenratePin(user)" class="btn btn-sm btn-success">Create Token</a></td>
+            <td ng-if="!user.isUsed && userRole == 'Admin'"><a ng-click="GenratePin(user)" class="btn btn-sm btn-info">Create Token</a></td>
             <td ng-if="user.isUsed && userRole == 'Admin'">Actived</td>
         </tr>
     </tbody>

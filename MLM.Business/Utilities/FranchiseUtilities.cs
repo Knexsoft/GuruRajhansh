@@ -38,16 +38,22 @@ namespace MLM.Business.Utilities
 
         public FranchiseIncome AddNewFrenchise(FranchiseIncomeReq model)
         {
-            var _frenchiseIncome = new FranchiseIncome();
-            _frenchiseIncome.ID = Guid.NewGuid();
-            _frenchiseIncome.UserID = Guid.Parse(model.UserID);
-            _frenchiseIncome.FranchiseIncomeTypeID = model.FrenchiseIncomeTypeID;
-            _frenchiseIncome.TotalAmount = model.Amount;
-            _frenchiseIncome.Income = model.Amount;
-            _frenchiseIncome.CreatedOn = DateTime.Now;
-            //_franchiseIncomeRepository.Add(_frenchiseIncome);
-            //_unitOfWork.Commit();
-            return _frenchiseIncome;
+            var _ID = Guid.NewGuid();
+            var _oData = _franchiseIncomeRepository.Get(_ID);
+            if(_oData == null)
+            {
+                var _frenchiseIncome = new FranchiseIncome();
+                _frenchiseIncome.ID = _ID;
+                _frenchiseIncome.UserID = Guid.Parse(model.UserID);
+                _frenchiseIncome.FranchiseIncomeTypeID = model.FrenchiseIncomeTypeID;
+                _frenchiseIncome.TotalAmount = model.Amount;
+                _frenchiseIncome.Income = model.Amount;
+                _frenchiseIncome.CreatedOn = DateTime.Now;
+                _frenchiseIncome.IsActive = false;
+                _franchiseIncomeRepository.Add(_frenchiseIncome);
+                _unitOfWork.Commit();
+            }
+            return _oData;
         }
 
         public void CreateNewFrenchisePins(IBaseRepository<UserPin> userPinRepository, FranchiseIncomeReq model, Guid FranchiseIncomeID, Guid UserID)

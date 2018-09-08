@@ -11,12 +11,12 @@
                     window.location.href = '/dashboard/Index';
                     alert('Your account is successfully activated !');
                     $scope._userpin = this._pin;
-                } else if (response.status == 400) {
-                    alert('Entered pin is not exist !');
                 }
             },
                 function (error) {
-                    alert(error);
+                    if (error.status == 400) {
+                        alert('Entered pin is not exist. Enter connect pin !');
+                    }
                 });
         }
     }

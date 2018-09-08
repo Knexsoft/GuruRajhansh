@@ -12,5 +12,6 @@ namespace MLM.Business.Models.ReqModels
         public int FreePins { get; set; }
         public decimal Amount { get; set; }
         public string UserID { get; set; }
+        public bool IsActive { get; set; }
     }
 }

@@ -75,6 +75,7 @@ namespace MLM.Business.Extensions
                     _fit.FreePins = Convert.ToInt32(rdr["FreePins"].ToString());
                     _fit.Amount = Convert.ToDecimal(rdr["TotalAmount"].ToString());
                     _fit.ID = rdr["ID"].ToString();
+                    _fit.IsActive = Convert.ToBoolean(rdr["IsActive"].ToString());
                     _franchiseIncomeTypeList.Add(_fit);
                 }
             }

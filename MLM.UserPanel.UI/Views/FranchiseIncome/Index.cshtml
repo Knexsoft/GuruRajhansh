@@ -35,8 +35,8 @@
                         <td>{{$index+1}}</td>
                         <td>{{fit.pins}}</td>
                         <td>{{fit.freePins}}</td>
-                        <td>{{fit.amount}}</td>
-                        <td><a href="/FranchiseIncome/PinsList?franchiseIncomeTypeID={{fit.id}}" class="btn btn-sm btn-success">View</a></td>
+                        <td>{{fit.amount | currency:"INR "}}</td>
+                        <td ng-show="{{fit.isActive}}"><a href="/FranchiseIncome/PinsList?franchiseIncomeTypeID={{fit.id}}" class="btn btn-sm btn-success">View</a></td>
                     </tr>
                 </tbody>
             </table>

@@ -19,6 +19,7 @@ namespace MLM.DataLayer.Configuration
             builder.Property(x => x.TotalAmount).IsRequired();
             builder.Property(x => x.Income).IsRequired();
             builder.Property(x => x.CreatedOn).IsRequired();
+            builder.Property(x => x.IsActive).IsRequired();
 
             builder.HasOne(x => x.User).WithMany(x => x.FrenchiseIncomes).HasForeignKey(x => x.UserID);
             builder.HasOne(x => x.FranchiseIncomeType).WithMany(x => x.FranchiseIncomes).HasForeignKey(x => x.FranchiseIncomeTypeID);

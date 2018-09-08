@@ -19,6 +19,7 @@
             $scope.$parent.Preloader = false;
             if (error.status == 401) {
                 $scope._flag = true;
+                alert('Invalid login try again');
             }
         });
     }

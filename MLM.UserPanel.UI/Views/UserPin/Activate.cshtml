@@ -3,17 +3,19 @@
     ViewData["Title"] = "Activate";
 }
 
-<h2>Activate Your Pin</h2>
+
 <section ng-controller="ctrPin">
-    <div class="container">
+    <div class="container table-light p-3">
+        <h2>Activate Your Pin</h2>
         <form ng-submit="ActivatePin()" name="UserPin">
             <div class="row">
-                <div class="col-4">
+                <div class="col-md-8">
                     <label>Enter Pin</label>
-                    <input type="number" maxlength="8" min="8" required ng-model="pin"/>
+                    <input type="number"ng-minlength="8" required ng-model="pin" name="pin"/>
+                    <span style="color:red" ng-if="UserPin.pin.$error.required && UserPin.pin.$dirty">Pin is required.</span>
                 </div>
-                <div class="col-4">
-                    <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-sm btn-success" ng-disabled="UserPin.$invalid">Submit</button>
                     <button type="reset" class="btn btn-sm btn-default">Cancel</button>
                 </div>
             </div>

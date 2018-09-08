@@ -10,4 +10,13 @@
         });
     }
 
+    // get Level income
+    rm.getLevelIncome = function (userId) {
+        return $http({
+            method: 'GET',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: "/LevelIncome/GetLevelIncome?userId=" + userId
+        });
+    }
+
 }])
