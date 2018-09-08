@@ -58,22 +58,28 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/Dashboard">
+                    <li class="nav-item" ng-class="{active: isActive('/Dashboard')}">
+                        <a class="nav-link " href="/Dashboard">
                             <i class="fa fa-dashboard"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" ng-class="{active: isActive('/FranchiseIncome')}">
                         <a class="nav-link" href="/FranchiseIncome">
                             <i class="fa fa-money"></i>
                             <p>Franhise Income</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" ng-class="{active: isActive('/SingleLegIncome')}">
                         <a class="nav-link" href="/SingleLegIncome">
                             <i class="fa fa-money"></i>
                             <p>Single Leg Income</p>
+                        </a>
+                    </li>
+                    <li class="nav-item" ng-class="{active: isActive('/LevelIncome')}">
+                        <a class="nav-link" href="/LevelIncome">
+                            <i class="fa fa-money"></i>
+                            <p>Level Income</p>
                         </a>
                     </li>
                 </ul>
@@ -167,6 +173,7 @@
     <script src="@Url.Content("~/scripts/Controllers/Dashboard/dashboard.js")"></script>
     <script src="@Url.Content("~/scripts/Controllers/Pins/pin.js")"></script>
     <script src="@Url.Content("~/scripts/Controllers/SingleLegIncome/SingleLegIncome.js")"></script>
+    <script src="@Url.Content("~/scripts/Controllers/LevelIncome/LevelIncome.js")"></script>
     <script src="@Url.Content("~/scripts/Services/Income.Services.js")"></script>
 
 

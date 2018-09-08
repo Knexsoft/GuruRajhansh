@@ -15,4 +15,10 @@ app.controller("ctrLayout", ["$scope", "$window", "UserServices", function ($sco
             })
         }
     }
+
+    // set active tab
+    $scope.isActive = function (viewLocation) {
+        return viewLocation === location.pathname;
+    };
 }]);
+
