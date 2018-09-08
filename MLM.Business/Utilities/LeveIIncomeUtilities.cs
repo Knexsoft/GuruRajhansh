@@ -12,7 +12,7 @@ namespace MLM.Business.Utilities
         private static SqlDataReader rdr = null;
         private static SqlCommand cmd = null;
         private static SqlConnection con = null;
-        private static string _connection = "Data Source=Kanha;Initial Catalog=MLM;Integrated Security=True";
+        private static string _connection = "Data Source=LAPTOP-5B2JV023\\SQLEXPRESS;Initial Catalog=MLM;Integrated Security=True";
 
         public List<LevelIncomeView> GetLevelIncomeByUserID(Guid userID)
         {

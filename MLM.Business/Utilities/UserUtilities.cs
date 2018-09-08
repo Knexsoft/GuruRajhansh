@@ -14,7 +14,7 @@ namespace MLM.Business.Utilities
         #region objects
         private readonly IBaseRepository<User> _userRepository;
         private readonly IUnitOfWork _unitOfWork;
-        String strConnString = "Data Source=Kanha;Initial Catalog=MLM;Integrated Security=True";
+        String strConnString = "Data Source=LAPTOP-5B2JV023\\SQLEXPRESS;Initial Catalog=MLM;Integrated Security=True";
         #endregion
 
         #region Constructor
