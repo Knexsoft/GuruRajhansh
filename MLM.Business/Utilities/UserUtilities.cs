@@ -1,5 +1,4 @@
-﻿using MLM.Business.Abstracts;
-using MLM.Business.Models.ReqModels;
+﻿using MLM.Business.Models.ReqModels;
 using MLM.Business.Models.ViewModels;
 using MLM.DataLayer.Abstracts;
 using MLM.DataLayer.EntityModel;
@@ -7,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace MLM.Business.Utilities
 {
@@ -60,7 +58,7 @@ namespace MLM.Business.Utilities
                         _userDetail.Gender = reader["Gender"].ToString();
                         _userDetail.ActiveToken = reader["ActiveToken"].ToString();
                         _userDetail.UserRole = reader["UserRole"].ToString();
-                        //_userDetail.IsUsed = Convert.ToBoolean(reader["IsUsed"]);
+                        _userDetail.IsUsed = Convert.ToBoolean(reader["IsUsed"]);
                         _userList.Add(_userDetail);
                     }
                 }
